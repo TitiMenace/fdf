@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2023/04/14 03:29:00 by tschecro         ###   ########.fr       */
+/*   Created: 2023/04/27 06:08:12 by tschecro          #+#    #+#             */
+/*   Updated: 2023/04/27 06:13:22 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ char	*ft_strjoin(char *remain, char *buffer);
 /* -------------------------------------------------------------------------- */
 void	init_hooks(t_mlx *mlx);
 int find_start_map(t_map *map, t_point *line);
-void	init_struct(t_mlx *mlx, t_point *line, t_map *map);
+void	init_mlx(t_mlx *mlx, t_map *map);
+void	init_line(t_point *line, t_mlx *mlx);
+void	init_s_map(t_map *map);
 int	main(int ac, char **av);
 
 /* -------------------------------------------------------------------------- */
@@ -68,7 +70,7 @@ int	ft_atoi(const char *str);
 /* -------------------------------------------------------------------------- */
 /*                           FILE = src/draw_line.c                           */
 /* -------------------------------------------------------------------------- */
-void	draw_line(t_mlx *mlx, t_point *seg, int couleur);
+void	draw_line(t_mlx *mlx, t_point *seg, int couleur, t_map *map);
 
 /* -------------------------------------------------------------------------- */
 /*                            FILE = src/parsing.c                            */

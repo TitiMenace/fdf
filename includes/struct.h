@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:06:31 by tschecro          #+#    #+#             */
-/*   Updated: 2023/04/14 03:04:21 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/04/27 07:07:13 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct	s_mlx
 {
 	void	*mlx;
 	void	*win;
+	int		w_w;
+	int		w_h;
 	t_color	couleur;
 }				t_mlx;
 

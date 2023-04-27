@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 05:15:33 by tschecro          #+#    #+#             */
-/*   Updated: 2023/04/14 03:29:35 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/04/27 06:12:40 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,36 @@ int find_start_map(t_map *map, t_point *line)
 	return (1);
 }
 
-void	init_struct(t_mlx *mlx, t_point *line, t_map *map)
+void	init_mlx(t_mlx *mlx, t_map *map)
 {
 	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "test");
+	if (WIN_WIDTH == 0 || WIN_HEIGHT == 0)
+	{
+		mlx->w_w = map->len_x * OFFSET * 2;
+		mlx->w_h = map->len_y * OFFSET * 2;
+	}
+	else
+	{
+		mlx->w_w = WIN_WIDTH;
+		mlx->w_h = WIN_HEIGHT;
+	}
+	mlx->win = mlx_new_window(mlx->mlx, mlx->w_w, mlx->w_h, "test");
 	mlx->couleur = (t_color){.b = 120, .g = 90};
+}
+
+void	init_line(t_point *line, t_mlx *mlx)
+{
 	line->a_x = 0;
 	line->a_y = 0;
 	line->b_x = 0;
 	line->b_y = 0;
-	line->start_x = WIN_WIDTH / 2;
-	line->start_y = WIN_HEIGHT / 2;
+	line->start_x = mlx->w_w / 2;
+	line->start_y = mlx->w_h / 2;
+}
+
+
+void	init_s_map(t_map *map)
+{
 	map->len_x = -1;
 	map->len_y = 0;
 }
@@ -73,11 +92,14 @@ int	main(int ac, char **av)
 	t_map	map;
 
 	(void)ac;
-	init_struct(&mlx, &line, &map);
+	if (ac != 2)
+		return (1);
+	init_s_map(&map);
 	mlx.couleur = (t_color){.b = 80, .g = 120};
 	if (!check_arg(av[1], &map))
 		return (write(2, "Error\n", 6));
-//	fill_line(&mlx, &line);
+	init_mlx(&mlx, &map);
+	init_line(&line, &mlx);
 	draw_map_x(&map, &mlx, &line);
 	draw_map_y(&map, &mlx, &line);
 	mlx_loop(mlx.mlx);
