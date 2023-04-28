@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 05:15:33 by tschecro          #+#    #+#             */
-/*   Updated: 2023/04/27 06:12:40 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/04/28 03:47:18 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,25 +78,16 @@ void	init_line(t_point *line, t_mlx *mlx)
 	line->start_y = mlx->w_h / 2;
 }
 
-
-void	init_s_map(t_map *map)
-{
-	map->len_x = -1;
-	map->len_y = 0;
-}
-
 int	main(int ac, char **av)
 {	
-	t_mlx	mlx;
-	t_point	line;
-	t_map	map;
-
-	(void)ac;
+	t_data	data;
+	t_map	**map;
+	
 	if (ac != 2)
 		return (1);
-	init_s_map(&map);
-	mlx.couleur = (t_color){.b = 80, .g = 120};
-	if (!check_arg(av[1], &map))
+	if	(!check_format[av[1]])
+		return (write(STDERR, "Incorrect format !\n", 19));
+	if (!init_map(av[1], &map, &data))
 		return (write(2, "Error\n", 6));
 	init_mlx(&mlx, &map);
 	init_line(&line, &mlx);

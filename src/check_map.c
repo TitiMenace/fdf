@@ -6,31 +6,13 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:57:46 by tschecro          #+#    #+#             */
-/*   Updated: 2023/04/07 05:46:15 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/04/28 03:47:12 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "includes.h"
 #include "struct.h"
-
-bool	check_chars(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-	{
-		return (false);
-	}
-	while (s[i])
-	{
-		if (!(s[i] == ' ' || s[i] == '\n' || (s[i] >= '0' && s[i] <= '9')))
-			return (false);
-		i++;
-	}
-	return (true);
-}
 
 bool	check_format(char *file_name)
 {	
@@ -44,37 +26,56 @@ bool	check_format(char *file_name)
 	return (true);
 }
 
-bool	check_arg(char *arg, t_map *map)
+char	*get_map(char *arg)
 {	
+	int		i;
+	char	*new_line;
 	char	*buffer;
-
-	buffer = parsing(arg, map);
-	if (!buffer)
-	{
-		return (false);
-	}
-	if (!init_map(buffer, map))
-		return (false);
 	
-	return (true);
+	i = open(arg, O_RDONLY);
+	if (i == -1)
+		return (NULL);
+	new_line = "";
+	buffer = NULL;
+	new_line = get_next_line(i);
+	while (new_line)
+	{
+		buffer = ft_strjoin(buffer, new_line);
+		new_line = get_next_line(i);
+	}
+	close(i);
+	return (free(new_line), buffer);
 }
 
-int	get_int(char *buffer, int *i)
+int	ft_atoi(char *buffer, int *index)
 {
-	int sign;
-	long result;
+	int	sign;
+	int result;
 
+	while (buffer[*index] == ' ' || buffer[*index] == '\n')
+		(*index)++;
 	sign = 1;
-	result = 0;
-	if (buffer[*i] == '-')
+	if (buffer[*index] == '-')
 	{
 		sign = -sign;
-		(*i)++;
+		(*index)++;
 	}
-	while (buffer[*i] >= '0' && buffer[*i] <= '9')
+	result = 0;
+	while (buffer[*index] >= '0' && buffer[*index] <= '9')
 	{
-		result = result * 10 + (buffer[*i] - 48);
-		(*i)++;
+		result = result * 10 + (buffer[*index] - 48);
+		(*index)++;
 	}
 	return (result * sign);
+}
+
+bool	init_map(char *file_name, t_map	***map, t_data *data)
+{
+	char	*buffer;
+	
+	buffer = get_map(file_name);
+	if (!parsing_map(buffer, map, data))
+		return (false);
+		
+
 }

@@ -6,19 +6,12 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:06:31 by tschecro          #+#    #+#             */
-/*   Updated: 2023/04/27 07:07:13 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/04/28 03:47:07 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
-
-typedef struct	s_map
-{
-	int len_x;
-	int len_y;
-	int	**plan;
-}				t_map;
 
 typedef union	s_color
 {
@@ -32,13 +25,20 @@ typedef union	s_color
 	};
 }				t_color;
 
+typedef struct	s_map
+{
+	 int		z;
+	 t_color	color;
+
+}				t_map;
+
+
 typedef struct	s_mlx
 {
 	void	*mlx;
 	void	*win;
 	int		w_w;
 	int		w_h;
-	t_color	couleur;
 }				t_mlx;
 
 
@@ -62,5 +62,12 @@ typedef	struct	s_line
 	int err;
 	int err2;
 }				t_line;
+
+typedef struct	s_data
+{
+	t_mlx	mlx;
+	t_point	point;
+	int		*line_len;
+}				t_data;
 
 #endif
