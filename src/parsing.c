@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:40:23 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/10 03:41:24 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/10 04:59:59 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ int	get_line_len(char *str, int i)
 		i++;
 	while (str[i] != '\n')
 	{
+		if (str[i] == ',')
+		{
+			while (!((str[i] >= '0' && str[i] <= '9') && str[i - 1] == ' '))
+				i++;
+		}
 		if (str[i] >= '0' && str[i] <= '9')
 		{
 			count++;
@@ -33,6 +38,7 @@ int	get_line_len(char *str, int i)
 		}
 		i++;
 	}
+	dprintf(2, "\n\n\n\n test : %d \n\n\n\n", count);
 	return (count);
 }
 

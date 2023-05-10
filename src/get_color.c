@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 04:50:52 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/10 02:43:51 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/10 04:39:14 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	ft_atohex(char *buffer, int	*index)
 	len = strhexlen(buffer, *index);
 	hex = 0;
 	i = 0;
+	while (buffer[(*index) - 1] != 'x')
+		(*index)++;
 	while (buffer[*index] != ' ')
 	{
 		if (buffer[*index] >= '0' && buffer[*index] <= '9')
