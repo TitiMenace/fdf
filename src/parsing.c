@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:40:23 by tschecro          #+#    #+#             */
-/*   Updated: 2023/04/28 03:47:01 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/10 03:41:24 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 #include "struct.h"
 #include "includes.h"
 
-int	get_line_len(char *str)
+int	get_line_len(char *str, int i)
 {
-	int	i;
 	int	count;
 
 	i = 0;
-	while (str[i])
+	count = 0;
+	while (str[i] == '\n' || str[i] == ' ')
+		i++;
+	while (str[i] != '\n')
 	{
 		if (str[i] >= '0' && str[i] <= '9')
 		{
@@ -51,7 +53,7 @@ int	get_lines(char *str)
 	count = 1;
 	while (str[i])
 	{
-		if (str[i] == '\n' && isprintable[str[i + 1]])
+		if (str[i] == '\n' && isprintable(str[i + 1]))
 			count++;
 		i++;
 	}
@@ -77,29 +79,30 @@ bool	parsing_map(char *buffer, t_map ***map, t_data *data)
 	int	x;
 	int	index;
 
-	data->line_len = malloc(sizeof(int) * get_lines(buffer));
+	data->len_y = get_lines(buffer);
+	data->line_len = malloc(sizeof(int) * data->len_y);
 	if (!data->line_len)
 		return (false);
-	*map = malloc(sizeof(t_map *) * get_lines(buffer));
+	*map = malloc(sizeof(t_map *) * data->len_y);
 	if (!*map)
 		return (free(data->line_len), false);
 	y = 0;
 	index = 0;
-	while (y < data->line_len)
+	while (buffer[index])
 	{
-		*map[y] = malloc(sizeof(t_map) * get_line_len());
-		if (!*map[y])
+		(*map)[y] = malloc(sizeof(t_map) * get_line_len(buffer, index));
+		if (!(*map)[y])
 			return (free_map(map, y), false);
+		data->line_len[y] = get_line_len(buffer, index);
 		x = 0;
-		while (x < get_line_len)
+		while (x < data->line_len[y])
 		{
-			*map[y][x]->z = ft_atoi(buffer, &index);
-			if (buffer[index == ','])
-				*map[y][x]->color.hex = get_color(buffer, &index);
+			(*map)[y][x].z = ft_atoi(buffer, &index);
+			if (buffer[index] == ',')
+				(*map)[y][x].color.hex = ft_atohex(buffer, &index);
 			x++;
 		}
 		y++;
 	}
-	
-
+	return (true);
 }
