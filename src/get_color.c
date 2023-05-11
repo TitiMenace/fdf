@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 04:50:52 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/10 04:39:14 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/11 03:11:06 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,14 @@
 #include "struct.h"
 #include "includes.h"
 
-int	strhexlen(char *buffer, int index)
+int	strhexlen(char *buffer)
 {
-	int	count;
+	int	i;
 
-	count = 0;
-	while (buffer[index] != ' ')
-	{
-		count++;
-		index++;
-	}
-	return (count);
+	i = 0;
+	while (buffer[i] != ' ')
+		i++;
+	return (i);
 }
 
 bool	ishexdigit(char c)
@@ -33,26 +30,24 @@ bool	ishexdigit(char c)
 			|| (c >= 'A' && c <= 'F'));
 }
 
-int	ft_atohex(char *buffer, int	*index)
+int	ft_atohex(char *buffer)
 {
-	int	i;
 	int	hex;
 	int len;
+	int	i;
 
-	len = strhexlen(buffer, *index);
+	len = strhexlen(buffer);
 	hex = 0;
 	i = 0;
-	while (buffer[(*index) - 1] != 'x')
-		(*index)++;
-	while (buffer[*index] != ' ')
+	while (buffer[i] != ' ')
 	{
-		if (buffer[*index] >= '0' && buffer[*index] <= '9')
-			hex += (buffer[*index] - 48) * pow(16, len - 1 - (*index));
-		else if (buffer[*index] >= 'a' && buffer[*index] <= 'f')
-			hex += (buffer[*index] - 'a' + 10) * pow(16, len - 1 - (*index));
-		else if (buffer[*index] >= 'A' && buffer[*index] <= 'F')
-			hex += (buffer[*index] - 'A' + 10) * pow(16, len - 1 - (*index));
-		(*index)++;
+		if (buffer[i] >= '0' && buffer[i] <= '9')
+			hex += (buffer[i] - 48) * pow(16, len - 1 - (i));
+		else if (buffer[i] >= 'a' && buffer[i] <= 'f')
+			hex += (buffer[i] - 'a' + 10) * pow(16, len - 1 - (i));
+		else if (buffer[i] >= 'A' && buffer[i] <= 'F')
+			hex += (buffer[i] - 'A' + 10) * pow(16, len - 1 - (i));
+		(i)++;
 	}
 	return (hex);
 }

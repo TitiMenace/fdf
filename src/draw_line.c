@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:55:11 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/10 02:23:29 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/11 02:19:45 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,10 @@ void	draw_line(t_data *data, t_point *seg, int couleur)
 	utils.sx = def_slope((int)seg->a_x, (int)seg->b_x);
 	utils.sy = def_slope((int)seg->a_y, (int)seg->b_y);
 	utils.err = def_error(utils.dx, utils.dy);
-	while ((int)seg->a_x != (int)seg->b_x || (int)seg->a_y != (int)seg->b_y)
+	while (((int)seg->a_x != (int)seg->b_x || (int)seg->a_y != (int)seg->b_y) && (seg->a_x >= 0 && seg->a_x <= data->mlx.w_w) && (seg->a_y >= 0 && seg->a_y <= data->mlx.w_h))
 	{
-		mlx_pixel_put(data->mlx.mlx, data->mlx.win, (int)seg->a_x, (int)seg->a_y, couleur);
+		if ((seg->a_x >= 0 && seg->a_x <= data->mlx.w_w) && (seg->a_y >= 0 && seg->a_y <= data->mlx.w_h))
+			mlx_pixel_put(data->mlx.mlx, data->mlx.win, (int)seg->a_x, (int)seg->a_y, couleur);
 		err2 = utils.err;
 		if (err2 > -utils.dx)
 		{

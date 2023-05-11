@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/10 02:25:08 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/10 02:31:00 by tschecro         ###   ########.fr       */
+/*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
+/*   Updated: 2023/05/11 03:13:02 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-#include "struct.h"
-#include "includes.h"
-#include "../lib/minilibx-linux/mlx.h"
+# include "struct.h"
+# include "includes.h"
+# include "../lib/minilibx-linux/mlx.h"
 
 /* -------------------------------------------------------------------------- */
 /*                             FILE = src/hooks.c                             */
@@ -26,9 +26,9 @@ int find_start_map(t_map *map, t_point *line);
 /* -------------------------------------------------------------------------- */
 /*                           FILE = src/get_color.c                           */
 /* -------------------------------------------------------------------------- */
-int	strhexlen(char *buffer, int index);
+int	strhexlen(char *buffer);
 bool	ishexdigit(char c);
-int	ft_atohex(char *buffer, int	*index);
+int	ft_atohex(char *buffer);
 
 /* -------------------------------------------------------------------------- */
 /*                      FILE = src/get_next_line_utils.c                      */
@@ -90,11 +90,6 @@ bool	isprintable(char c);
 int	get_lines(char *str);
 void	free_map(t_map ***map, int i);
 bool	parsing_map(char *buffer, t_map ***map, t_data *data);
-
-/* -------------------------------------------------------------------------- */
-/*                             FILE = src/free.c                              */
-/* -------------------------------------------------------------------------- */
-void free_all(char *buffer, t_map *map);
 
 
 #endif

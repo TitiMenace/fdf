@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:40:23 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/10 04:59:59 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/11 04:19:53 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	get_line_len(char *str, int i)
 		}
 		i++;
 	}
-	dprintf(2, "\n\n\n\n test : %d \n\n\n\n", count);
+//	dprintf(2, "\n\n\n\n test : %d \n\n\n\n", count);
 	return (count);
 }
 
@@ -94,7 +94,7 @@ bool	parsing_map(char *buffer, t_map ***map, t_data *data)
 		return (free(data->line_len), false);
 	y = 0;
 	index = 0;
-	while (buffer[index])
+	while (y < data->len_y)
 	{
 		(*map)[y] = malloc(sizeof(t_map) * get_line_len(buffer, index));
 		if (!(*map)[y])
@@ -105,7 +105,13 @@ bool	parsing_map(char *buffer, t_map ***map, t_data *data)
 		{
 			(*map)[y][x].z = ft_atoi(buffer, &index);
 			if (buffer[index] == ',')
-				(*map)[y][x].color.hex = ft_atohex(buffer, &index);
+			{
+				while (buffer[index - 1] != 'x')
+					index++;
+				(*map)[y][x].color.hex = ft_atohex(&buffer[index]);
+				while (buffer[index] != ' ')
+					index++;
+			}
 			x++;
 		}
 		y++;
