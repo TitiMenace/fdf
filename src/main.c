@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 01:38:40 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/10 02:33:23 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/13 00:11:59 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ void	init_mlx(t_data *data)
 	{
 		data->mlx.w_w = big * OFFSET * 2;
 		data->mlx.w_h = data->len_y * OFFSET * 2;
+		if (data->mlx.w_w > 1920 || data->mlx.w_h > 1080)
+		{
+			data->mlx.w_w = 1920;
+			data->mlx.w_h = 1080;
+		}
 	}
 	else
 	{
@@ -68,6 +73,7 @@ int	main(int ac, char **av)
 		return (write(2, "Incorrect format !\n", 19));
 	if (!init_map(av[1], &map, &data))
 		return (write(2, "Error\n", 6));
+	dprintf(2, "\ntest\n");
 	init_mlx(&data);
 	init_line(&line, &data);
 	draw_map_x(&map, &data, &line);

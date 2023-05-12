@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:57:46 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/10 02:34:10 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/13 00:09:15 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,12 @@ char	*get_map(char *arg)
 	char	*new_line;
 	char	*buffer;
 	
+	
 	i = open(arg, O_RDONLY);
 	if (i == -1)
+	{
 		return (NULL);
+	}
 	new_line = "";
 	buffer = NULL;
 	new_line = get_next_line(i);

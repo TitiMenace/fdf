@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:40:23 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/11 04:19:53 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/13 01:28:41 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,22 @@ int	get_line_len(char *str, int i)
 	while (str[i] == '\n' || str[i] == ' ')
 		i++;
 	while (str[i] != '\n')
-	{
-		if (str[i] == ',')
-		{
-			while (!((str[i] >= '0' && str[i] <= '9') && str[i - 1] == ' '))
-				i++;
-		}
+	{ 
+		while (str[i] == ' ')
+			i++;
 		if (str[i] >= '0' && str[i] <= '9')
 		{
 			count++;
 			while (str[i] >= '0' && str[i] <= '9')
 				i++;
-			continue ;
 		}
-		i++;
+		if (str[i] == ',')
+		{
+			while (str[i] != ' ' && str[i] != '\n')
+				i++;
+			continue;
+		}
 	}
-//	dprintf(2, "\n\n\n\n test : %d \n\n\n\n", count);
 	return (count);
 }
 
@@ -109,7 +109,7 @@ bool	parsing_map(char *buffer, t_map ***map, t_data *data)
 				while (buffer[index - 1] != 'x')
 					index++;
 				(*map)[y][x].color.hex = ft_atohex(&buffer[index]);
-				while (buffer[index] != ' ')
+				while (buffer[index] != ' ' && buffer[index] != '\n')
 					index++;
 			}
 			x++;

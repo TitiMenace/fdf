@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 04:50:52 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/11 03:11:06 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/13 00:51:11 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	strhexlen(char *buffer)
 	int	i;
 
 	i = 0;
-	while (buffer[i] != ' ')
+	while (buffer[i] && buffer[i] != ' ' && buffer[i] != '\n')
 		i++;
 	return (i);
 }
@@ -39,7 +39,7 @@ int	ft_atohex(char *buffer)
 	len = strhexlen(buffer);
 	hex = 0;
 	i = 0;
-	while (buffer[i] != ' ')
+	while (buffer[i] && buffer[i] != ' ' && buffer[i] != '\n')
 	{
 		if (buffer[i] >= '0' && buffer[i] <= '9')
 			hex += (buffer[i] - 48) * pow(16, len - 1 - (i));
