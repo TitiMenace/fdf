@@ -6,13 +6,13 @@
 #    By: tschecro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/19 05:15:52 by tschecro          #+#    #+#              #
-#    Updated: 2023/05/10 02:42:15 by tschecro         ###   ########.fr        #
+#    Updated: 2023/05/13 04:01:02 by tschecro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_FILES		=	main.c fdf_utils.c get_next_line.c get_next_line_utils.c \
 					check_map.c parsing.c draw_map.c draw_line.c \
-					get_color.c 
+					get_color.c mlx.c
 
 SRC_FILES_BONUS	=
 

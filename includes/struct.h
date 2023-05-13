@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:06:31 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/10 01:48:13 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/13 03:36:36 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,20 @@ typedef	struct	s_line
 	int err2;
 }				t_line;
 
+typedef struct	s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_lenght;
+	int		endian;
+}				t_img;
+
 typedef struct	s_data
 {
 	t_mlx	mlx;
 	t_point	point;
+	t_img	img;
 	int		*line_len;
 	int		len_y;
 }				t_data;

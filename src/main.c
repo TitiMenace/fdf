@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 01:38:40 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/13 00:11:59 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/13 03:58:31 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,12 @@ int	main(int ac, char **av)
 		return (write(2, "Incorrect format !\n", 19));
 	if (!init_map(av[1], &map, &data))
 		return (write(2, "Error\n", 6));
-	dprintf(2, "\ntest\n");
 	init_mlx(&data);
+	img_init(&data);
 	init_line(&line, &data);
 	draw_map_x(&map, &data, &line);
 	draw_map_y(&map, &data, &line);
+	mlx_put_image_to_window(data.mlx.mlx, data.mlx.win, data.img.img, 0, 0);
 	mlx_loop(data.mlx.mlx);
 	return (0);
 }
