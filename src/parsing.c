@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:40:23 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/13 01:28:41 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/13 05:27:07 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@ int	get_line_len(char *str, int i)
 
 	i = 0;
 	count = 0;
+
 	while (str[i] == '\n' || str[i] == ' ')
 		i++;
 	while (str[i] != '\n')
 	{ 
 		while (str[i] == ' ')
+			i++;
+		if (str[i] == '-')
 			i++;
 		if (str[i] >= '0' && str[i] <= '9')
 		{
@@ -112,6 +115,8 @@ bool	parsing_map(char *buffer, t_map ***map, t_data *data)
 				while (buffer[index] != ' ' && buffer[index] != '\n')
 					index++;
 			}
+			else
+				(*map)[y][x].color.hex = 0;
 			x++;
 		}
 		y++;
