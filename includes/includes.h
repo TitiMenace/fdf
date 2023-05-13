@@ -10,7 +10,7 @@
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
-# define OFFSET 30
+# define OFFSET 3
 # define RA_X (35.26 * M_PI / 180)
 # define RA_Y 0
 # define RA_Z (M_PI / 4)
