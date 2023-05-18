@@ -6,41 +6,47 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 00:27:38 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/10 00:28:23 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/14 22:08:22 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	hooks_handler(int keycode, t_mlx *mlx)
-{
-	static unsigned int	i;
+#include "fdf.h"
+#include "includes.h"
+#include "struct.h"
 
-	if (keycode == XK_Up)
-	{
-		mlx_pixel_put(mlx->mlx, mlx->win, 1920 / 2 - i, 1080 / 2, mlx->couleur.hex);
-		mlx_pixel_put(mlx->mlx, mlx->win, 1920 / 2 + i, 1080 / 2, mlx->couleur.hex);
-		i = i + 1;
-	}
-	if (keycode == XK_Down && i > 0)
-	{
-		mlx_pixel_put(mlx->mlx, mlx->win, 1920 / 2 - i, 1080 / 2, 0);
-		mlx_pixel_put(mlx->mlx, mlx->win, 1920 / 2 + i, 1080 / 2, 0);
-		i = i - 1;
-	}
+int	destroy(t_data *data)
+{
+	mlx_destroy_window(data->mlx.mlx, data->mlx.win);
+	mlx_destroy_display(data->mlx.mlx);
+	free_map(&(data->map), data->len_y - 1);
+	free(data->mlx.mlx);
+	exit(EXIT_SUCCESS);
+	return(1);
+
+}
+
+static int	hooks_handler(int zazou, t_data *data)
+{
+	if (zazou == XK_Escape)
+		destroy(data);
+	if (zazou == XK_Up)
+		data->offset++;
+	if (zazou == XK_Down && data->offset > 0)
+		data->offset--;
+	rendering(data);
 	return (1);
 }
 
-void	init_hooks(t_mlx *mlx)
+int	cross_button(t_data *data)
 {
-	mlx_hook(mlx->win, KeyPress, KeyPressMask, hooks_handler, mlx);
-}
-
-int find_start_map(t_map *map, t_point *line)
-{	
-	if (map->len_x % 2 == 0)
-		line->start_x = line->start_x - (OFFSET / 2);
-	line->start_x = line->start_x - (OFFSET * (map->len_x / 2));
-	if (map->len_y % 2 == 0)
-		line->start_y = line->start_y - (OFFSET / 2);
-	line->start_y = line->start_y - (OFFSET * (map->len_y / 2));
+	destroy(data);
 	return (1);
 }
+
+
+void	init_hooks(t_data *data)
+{
+	mlx_hook(data->mlx.win, 17, (1L << 17), cross_button, data);
+	mlx_hook(data->mlx.win, 2, KeyPressMask, hooks_handler, data);
+}
+

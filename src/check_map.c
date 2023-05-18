@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:57:46 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/13 04:41:53 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/14 19:29:00 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ bool	init_map(char *file_name, t_map	***map, t_data *data)
 	char	*buffer;
 	
 	buffer = get_map(file_name);
+	if (!buffer)
+		return (false);
 	if (!parsing_map(buffer, map, data))
 		return (false);
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:40:23 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/13 06:17:07 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/14 21:07:28 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	free_map(t_map ***map, int i)
 	x = 0;
 	while (x < i)
 	{
-		free(*map[x]);
+		free((*map)[x]);
 		x++;
 	}
 	free(*map);

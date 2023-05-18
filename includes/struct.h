@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:06:31 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/13 03:36:36 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/14 22:03:38 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,14 @@ typedef struct	s_img
 
 typedef struct	s_data
 {
+	t_point	line;
+	t_map	**map;
 	t_mlx	mlx;
 	t_point	point;
 	t_img	img;
 	int		*line_len;
 	int		len_y;
+	int		offset;
 }				t_data;
 
 #endif

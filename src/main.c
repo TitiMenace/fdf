@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 01:38:40 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/13 04:41:13 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/14 22:07:40 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	init_mlx(t_data *data)
 	data->mlx.mlx = mlx_init();
 	if (WIN_WIDTH == 0 || WIN_HEIGHT == 0)
 	{
-		data->mlx.w_w = big * OFFSET * 2;
-		data->mlx.w_h = data->len_y * OFFSET * 2;
+		data->mlx.w_w = big * data->offset * 2;
+		data->mlx.w_h = data->len_y * data->offset * 2;
 		if (data->mlx.w_w > 1920 || data->mlx.w_h > 1080)
 		{
 			data->mlx.w_w = 1920;
@@ -55,30 +55,41 @@ void	init_mlx(t_data *data)
 	data->mlx.win = mlx_new_window(data->mlx.mlx, data->mlx.w_w, data->mlx.w_h, "test");
 }
 
+void	init_offset(t_data *data)
+{
+	data->offset =  OFFSET + 1;
+}
+
 void	init_line(t_point *line, t_data *data)
 {
 	line->start_x = data->mlx.w_w / 2;
 	line->start_y = data->mlx.w_h / 2;
 }
 
+void	rendering(t_data *data)
+{
+	img_init(data);
+	draw_map_x(&(data->map), data, &(data->line));
+	draw_map_y(&(data->map), data, &(data->line));
+	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->img.img, 0, 0);
+}
+
+
 int	main(int ac, char **av)
 {	
 	t_data	data;
-	t_map	**map;
-	t_point	line;
 	
 	if (ac != 2)
 		return (1);
 	if	(!check_format(av[1]))
 		return (write(2, "Incorrect format !\n", 19));
-	if (!init_map(av[1], &map, &data))
+	if (!init_map(av[1], &(data.map), &data))
 		return (write(2, "Error\n", 6));
+	init_offset(&data);
 	init_mlx(&data);
-	img_init(&data);
-	init_line(&line, &data);
-	draw_map_x(&map, &data, &line);
-	draw_map_y(&map, &data, &line);
-	mlx_put_image_to_window(data.mlx.mlx, data.mlx.win, data.img.img, 0, 0);
+	init_line(&(data.line), &data);
+	rendering(&data);	
+	init_hooks(&data);	
 	mlx_loop(data.mlx.mlx);
 	return (0);
 }

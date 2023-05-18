@@ -6,7 +6,7 @@
 /*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2023/05/13 03:59:32 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/14 22:09:23 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 /* -------------------------------------------------------------------------- */
 /*                             FILE = src/hooks.c                             */
 /* -------------------------------------------------------------------------- */
-void	init_hooks(t_mlx *mlx);
-int find_start_map(t_map *map, t_point *line);
+int	destroy(t_data *data);
+int	cross_button(t_data *data);
+void	init_hooks(t_data *data);
 
 /* -------------------------------------------------------------------------- */
 /*                           FILE = src/get_color.c                           */
@@ -48,7 +49,9 @@ char	*ft_strjoin(char *remain, char *buffer);
 /* -------------------------------------------------------------------------- */
 int	get_biggest_len(t_data *data);
 void	init_mlx(t_data *data);
+void	init_offset(t_data *data);
 void	init_line(t_point *line, t_data *data);
+void	rendering(t_data *data);
 int	main(int ac, char **av);
 
 /* -------------------------------------------------------------------------- */
