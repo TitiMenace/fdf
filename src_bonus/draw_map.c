@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 03:10:39 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/22 20:58:58 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/22 21:26:30 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	projections(t_point *line, t_data *data, t_rot *r1, t_rot *r2)
 	line->a_y = line->start_y + y_projection(data, r1->x, r1->y, r1->z);
 	line->b_x = line->start_x + x_projection(data, r2->x, r2->y);
 	line->b_y = line->start_y + y_projection(data, r2->x, r2->y, r2->z);
-	dprintf(2, "%f * %f * %f * %f\n", line->a_x, line->a_y, line->b_x, line->b_y);
+//	dprintf(2, "%f * %f * %f * %f\n", line->a_x, line->a_y, line->b_x, line->b_y);
 }
 
 void	init_rot(t_rot *rotate, float x, float y, float z, t_point *line)

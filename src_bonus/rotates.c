@@ -48,8 +48,8 @@ void	rotate_z(t_rot *rot, t_data *data)
 	x_tmp = rot->x * c_theta - rot->y * s_theta;
 	y_tmp = rot->x * s_theta + rot->y * c_theta;
 
-	rot->x += x_tmp;
-	rot->y += y_tmp;
+	rot->x = x_tmp;
+	rot->y = y_tmp;
 }
 
 void	rotate_y(t_rot *rot, t_data *data)
@@ -67,8 +67,8 @@ void	rotate_y(t_rot *rot, t_data *data)
 	x_tmp = rot->x * c_theta - rot->z * s_theta;
 	z_tmp = -(rot->x) * s_theta + rot->z * c_theta;
 
-	rot->x += x_tmp;
-	rot->z += z_tmp;
+	rot->x = x_tmp;
+	rot->z = z_tmp;
 }
 
 void rotate_x(t_rot *rot, t_data *data)
@@ -86,6 +86,6 @@ void rotate_x(t_rot *rot, t_data *data)
 	y_tmp = rot->y * c_theta - rot->z * s_theta;
 	z_tmp = rot->y * s_theta + rot->z * c_theta;
 
-	rot->y += y_tmp;
-	rot->z += z_tmp;
+	rot->y = y_tmp;
+	rot->z = z_tmp;
 }
