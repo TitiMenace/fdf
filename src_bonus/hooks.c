@@ -29,6 +29,18 @@ static int	hooks_handler(int zazou, t_data *data)
 {
 	if (zazou == XK_Escape)
 		destroy(data);
+	if (zazou == XK_Return)
+		data->offset = data->offset * 1.1;
+	if (zazou == XK_BackSpace && data->offset > 0)
+		data->offset = data->offset * 0.9;
+	if (zazou == XK_Up)
+		data->line.start_y = data->line.start_y - 5; 
+	if (zazou == XK_Down)
+		data->line.start_y = data->line.start_y + 5; 
+	if (zazou == XK_Left)
+		data->line.start_x = data->line.start_x - 5; 
+	if (zazou == XK_Right)
+		data->line.start_x = data->line.start_x + 5;
 	rendering(data);
 	return (1);
 }

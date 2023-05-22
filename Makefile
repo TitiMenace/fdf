@@ -14,7 +14,9 @@ SRC_FILES		=	main.c fdf_utils.c get_next_line.c get_next_line_utils.c \
 					check_map.c parsing.c draw_map.c draw_line.c \
 					get_color.c mlx.c hooks.c
 
-SRC_FILES_BONUS	=
+SRC_FILES_BONUS	=	main.c fdf_utils.c get_next_line.c get_next_line_utils.c \
+					check_map.c parsing.c draw_map.c draw_line.c \
+					get_color.c mlx.c hooks.c
 
 SRC_DIR_BONUS	= src_bonus
 
@@ -43,6 +45,8 @@ LIBS = $(MLX)
 
 NAME	=	fdf	
 
+BONUS_NAME	= fdf_bonus
+
 CC		=	cc
 
 all		:	$(NAME)
@@ -62,25 +66,25 @@ clean	:
 
 fclean	:	clean
 			rm -f $(NAME)
-			rm -f checker
+			rm -f $(BONUS_NAME)
 
 re		:	fclean all
 
-bonus	:	$(OBJ_BONUS)
-			$(CC) $(OBJ_BONUS) -o checker
-			@echo "\033[1;32m\nDone!\033[0m"
+bonus	:	$(BONUS_NAME)
 
-$(LIBS)	:
+$(BONUS_NAME)	:	 	$(OBJ_BONUS) $(LIBS)
+						$(CC) $(OBJ_BONUS) $(LIBS) -lm -lXext -lX11 -o $(BONUS_NAME)
+						@echo "\033[1;32m\nDone!\033[0m"
+
+$(OBJ_BONUS_DIR)/%.o 		:	$(SRC_DIR_BONUS)/%.c
+						@printf "\033[0;33m Generating fdf object... %-38.38s \r" $@
+						@mkdir -p $(OBJ_BONUS_DIR)
+						@$(CC) -Wall -Wextra -Werror -g3 -c -I $(HEADER) $< -o $@
+
+$(LIBS)	:				
 			make -C $(LIBS_FOLDER)/$(MLX_DIR)
 
 cleanlib :
 			make fclean -C $(LIBS_FOLDER)/$(MLX_DIR)
-
-
-$(OBJ_BONUS_DIR)/%.o 		:	$(SRC_DIR_BONUS)/%.c
-								@printf "\033[0;33mGenerating fdf object... %-38.38s \r" $@
-								@mkdir -p $(OBJ_BONUS_DIR)
-								@$(CC) -Wall -Wextra -Werror -g3 -c -I $(HEADER) $< -o $@
-
 
 .PHONY	:	all clean fclean re cleanlib

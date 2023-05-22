@@ -118,10 +118,7 @@ bool	parsing_map(char *buffer, t_map ***map, t_data *data)
 			else
 			{
 				if ((*map)[y][x].z > 0)
-				{
-				//	(*map)[y][x].color.hex = 0xFAAC58;
 					(*map)[y][x].color.hex = 0xffc0cb;
-				}
 				else
 					(*map)[y][x].color.hex = 0xFF8000;
 			}

@@ -74,14 +74,13 @@ typedef struct	s_img
 
 typedef struct	s_data
 {
-	t_point	line;
 	t_map	**map;
 	t_mlx	mlx;
-	t_point	point;
+	t_point	line;
 	t_img	img;
 	int		*line_len;
 	int		len_y;
-	int		offset;
+	float	offset;
 }				t_data;
 
 #endif
