@@ -16,6 +16,8 @@
 
 void	img_init(t_data	*data)
 {
+	if (data->img.img)
+		mlx_destroy_image(data->mlx.mlx, data->img.img);
 	data->img.img = mlx_new_image(data->mlx.mlx, data->mlx.w_w, data->mlx.w_h);
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel, &data->img.line_lenght, &data->img.endian);
 }

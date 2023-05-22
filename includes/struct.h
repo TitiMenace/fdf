@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:06:31 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/14 22:03:38 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:41:42 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,14 @@ typedef struct	s_point
 		
 }				t_point;
 
+typedef struct s_rot
+{
+	float	x;
+	float	y;
+	float	z;
+}				t_rot;
+
+
 typedef	struct	s_line
 {
 	int	dx;
@@ -72,8 +80,16 @@ typedef struct	s_img
 	int		endian;
 }				t_img;
 
+typedef struct	s_angle
+{
+	float	angle_x;
+	float	angle_y;
+	float	angle_z;
+}				t_angle;
+
 typedef struct	s_data
 {
+	t_angle angle;
 	t_map	**map;
 	t_mlx	mlx;
 	t_point	line;

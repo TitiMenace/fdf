@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 00:27:38 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/14 22:08:22 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/22 17:35:21 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ int	destroy(t_data *data)
 
 static int	hooks_handler(int zazou, t_data *data)
 {
+/*	if (data->angle.angle_x >= 360 || data->angle.angle_x <= -360)
+		data->angle.angle_x = 0;
+	if (data->angle.angle_y >= 360 || data->angle.angle_y <= -360)
+		data->angle.angle_y = 0;
+	if (data->angle.angle_z >= 360 || data->angle.angle_z <= -360)
+		data->angle.angle_z = 0;
+		*/
 	if (zazou == XK_Escape)
 		destroy(data);
 	if (zazou == XK_Return)
@@ -41,6 +48,18 @@ static int	hooks_handler(int zazou, t_data *data)
 		data->line.start_x = data->line.start_x - 5; 
 	if (zazou == XK_Right)
 		data->line.start_x = data->line.start_x + 5;
+	if (zazou == XK_q)
+ 		data->angle.angle_x--;
+	if (zazou == XK_w)
+		data->angle.angle_x++;
+	if (zazou == XK_a)
+ 		data->angle.angle_y--;
+	if (zazou == XK_s)
+ 		data->angle.angle_x++;
+	if (zazou == XK_z)
+ 		data->angle.angle_z--;
+	if (zazou == XK_x)
+ 		data->angle.angle_z++;
 	rendering(data);
 	return (1);
 }

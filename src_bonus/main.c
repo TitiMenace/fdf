@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 01:38:40 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/14 22:07:40 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/22 17:31:38 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	init_mlx(t_data *data)
 		data->mlx.w_w = WIN_WIDTH;
 		data->mlx.w_h = WIN_HEIGHT;
 	}
-	data->mlx.win = mlx_new_window(data->mlx.mlx, data->mlx.w_w, data->mlx.w_h, "test");
+	data->mlx.win = mlx_new_window(data->mlx.mlx, data->mlx.w_w, data->mlx.w_h, "fdf");
 }
 
 void	init_offset(t_data *data)
@@ -88,6 +88,7 @@ int	main(int ac, char **av)
 	init_offset(&data);
 	init_mlx(&data);
 	init_line(&(data.line), &data);
+	init_angle(&data);
 	rendering(&data);	
 	init_hooks(&data);	
 	mlx_loop(data.mlx.mlx);
