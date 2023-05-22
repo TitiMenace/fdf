@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 00:27:38 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/22 17:35:21 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:00:15 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ static int	hooks_handler(int zazou, t_data *data)
 	if (zazou == XK_Right)
 		data->line.start_x = data->line.start_x + 5;
 	if (zazou == XK_q)
- 		data->angle.angle_x--;
+ 		data->angle.angle_x -= 2;
 	if (zazou == XK_w)
-		data->angle.angle_x++;
+		data->angle.angle_x += 2;
 	if (zazou == XK_a)
- 		data->angle.angle_y--;
+ 		data->angle.angle_y -= 2;
 	if (zazou == XK_s)
- 		data->angle.angle_x++;
+ 		data->angle.angle_x += 2;
 	if (zazou == XK_z)
- 		data->angle.angle_z--;
+ 		data->angle.angle_z -= 2;
 	if (zazou == XK_x)
- 		data->angle.angle_z++;
+ 		data->angle.angle_z += 2;
 	rendering(data);
 	return (1);
 }

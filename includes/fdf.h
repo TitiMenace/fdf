@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 15:21:11 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/22 16:43:10 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:48:49 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	ft_strcmp(char *s1, char *s2);
 /*                        FILE = src_bonus/draw_map.c                         */
 /* -------------------------------------------------------------------------- */
 void	projections(t_point *line, t_data *data, t_rot *r1, t_rot *r2);
-void	init_rot(t_rot *rotate, int x, int y, int z);
+void	init_rot(t_rot *rotate, float x, float y, float z, t_point *line);
 bool	draw_map_x(t_map ***map, t_data *data, t_point *line);
 bool	draw_map_y(t_map ***map, t_data *data, t_point *line);
 

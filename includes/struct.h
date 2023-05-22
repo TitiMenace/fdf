@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:06:31 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/22 16:41:42 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:45:10 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef union	s_color
 
 typedef struct	s_map
 {
-	 int		z;
+	 float		z;
 	 t_color	color;
 
 }				t_map;
@@ -48,8 +48,8 @@ typedef struct	s_point
 		float	a_y;
 		float	b_x;
 		float	b_y;
-		int	start_x;
-		int	start_y;
+		float	start_x;
+		float	start_y;
 		
 }				t_point;
 
