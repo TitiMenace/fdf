@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:47:14 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/22 23:58:27 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/05/23 02:08:09 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,5 @@ float	y_projection(t_data *data, float x, float y, float z)
 	(void)x;
 	(void)z;
 	new_y = data->offset * y;
-	dprintf(2, "%f\n", data->offset);
 	return (new_y);
 }
