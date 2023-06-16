@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   fdfi.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 15:21:11 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/22 20:48:49 by tschecro         ###   ########.fr       */
+/*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
+/*   Updated: 2023/06/16 14:32:17 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,10 @@ int	ft_strcmp(char *s1, char *s2);
 /* -------------------------------------------------------------------------- */
 void	projections(t_point *line, t_data *data, t_rot *r1, t_rot *r2);
 void	init_rot(t_rot *rotate, float x, float y, float z, t_point *line);
-bool	draw_map_x(t_map ***map, t_data *data, t_point *line);
-bool	draw_map_y(t_map ***map, t_data *data, t_point *line);
+void	init_origin(t_rot *r1, t_rot *r2);
+void	draw(t_rot *r1, t_rot *r2, t_data *data,  t_point *line, int color);
+bool	draw_adjacent(int i, t_map ***map, t_data *data, t_point *line);
+bool	draw_map(t_map ***map, t_data *data, t_point *line);
 
 /* -------------------------------------------------------------------------- */
 /*                      FILE = src_bonus/get_next_line.c                      */
@@ -95,7 +97,7 @@ void rotate_x(t_rot *rot, t_data *data);
 /* -------------------------------------------------------------------------- */
 /*                        FILE = src_bonus/isometric.c                        */
 /* -------------------------------------------------------------------------- */
-float	x_projection(t_data *data, float x, float y);
+float	x_projection(t_data *data, float x, float y, float z);
 float	y_projection(t_data *data, float x, float y, float z);
 
 /* -------------------------------------------------------------------------- */

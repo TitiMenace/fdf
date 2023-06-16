@@ -1,11 +1,12 @@
-
+/* ************************************************************************** */
+/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/10 03:10:39 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/23 02:08:10 by tschecro         ###   ########.fr       */
+/*   Created: 2023/06/16 14:29:30 by tschecro          #+#    #+#             */
+/*   Updated: 2023/06/16 15:06:18 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +17,9 @@
 
 void	projections(t_point *line, t_data *data, t_rot *r1, t_rot *r2)
 {
-
-	line->a_x = line->start_x + x_projection(data, r1->x, r1->y);
+	line->a_x = line->start_x + x_projection(data, r1->x, r1->y, r1->z);
 	line->a_y = line->start_y + y_projection(data, r1->x, r1->y, r1->z);
-	line->b_x = line->start_x + x_projection(data, r2->x, r2->y);
+	line->b_x = line->start_x + x_projection(data, r2->x, r2->y, r2->z);
 	line->b_y = line->start_y + y_projection(data, r2->x, r2->y, r2->z);
 }
 
@@ -29,66 +29,61 @@ void	init_rot(t_rot *rotate, float x, float y, float z, t_point *line)
 	rotate->x = x;
 	rotate->y = y;
 	rotate->z = z;
-
 }
 
-bool	draw_map_x(t_map ***map, t_data *data, t_point *line)
-{	
-	int		i;
-	int		j;
-	int	color;
-	t_rot	rot_1;
-	t_rot	rot_2;
+void	init_origin(t_rot *r1, t_rot *r2)
+{
+	r1->x = r2->x;
+	r1->y = r2->y;
+	r1->z = r2->z;
+}
 
-	i = 0;
-	while (i < data->len_y)
+void	draw(t_rot *r1, t_rot *r2, t_data *data,  t_point *line, int color)
+{
+	projections(line, data, r1, r2);
+	draw_line(data, line, color);
+}
+
+
+bool	draw_adjacent(int i, t_map ***map, t_data *data, t_point *line)
+{
+	t_rot	origin;
+	t_rot	right;
+	t_rot	down;
+	int		j;
+	
+	j = 0;
+	while (j + 1 < data->line_len[i])
 	{
-		j = 0;
-		while (j + 1 < data->line_len[i])
+		if	(j == 0)
 		{
-			init_rot(&rot_1, (float)j - ((float)data->line_len[i] / 2), (float)i - (float)data->len_y / 2, (*map)[i][j].z, line);
-			init_rot(&rot_2, ((float)j - (float)data->line_len[i] / 2) + 1, (float)i - (float)data->len_y / 2, (*map)[i][j + 1].z, line);
-			init_rotations(&rot_1, data);
-			init_rotations(&rot_2, data);
-			projections(line, data, &rot_1, &rot_2);
-			if ((*map)[i][j + 1].z > ((*map)[i][j].z))
-				color = (*map)[i][j + 1].color.hex;
-			else
-				color = (*map)[i][j].color.hex;
-			draw_line(data, line, color);
-			j++;
+			init_rot(&origin, (float)j - ((float)data->line_len[i] / 2), (float)i - (float)data->len_y / 2, (*map)[i][j].z, line);
+			init_rotations(&origin, data);
 		}
-		i++;
+		else
+			init_origin(&origin, &right);
+		init_rot(&right, ((float)j - (float)data->line_len[i] / 2) + 1, (float)i - (float)data->len_y / 2, (*map)[i][j + 1].z, line);
+		init_rot(&down, (float)j - ((float)data->line_len[i] / 2), ((float)i - (float)data->len_y / 2) + 1, (*map)[i + 1][j].z, line);
+		init_rotations(&right, data);
+		init_rotations(&down, data);
+		draw(&origin, &right, data, line, 0x0000ff00);
+		draw(&origin, &down, data, line, 0x0000ff00);
+		j++;
 	}
 	return (true);
 }
 
-bool	draw_map_y(t_map ***map, t_data *data, t_point *line)
-{	
+
+bool	draw_map(t_map ***map, t_data *data, t_point *line)
+{
 	int	i;
 	int	j;
-	int	color;
-	t_rot	rot_1;
-	t_rot	rot_2;
-	
+
 	i = 0;
 	while (i + 1 < data->len_y)
 	{
 		j = 0;
-		while (j < data->line_len[i])
-		{
-			init_rot(&rot_1, (float)j - ((float)data->line_len[i] / 2), (float)i - (float)data->len_y / 2, (*map)[i][j].z, line);
-			init_rot(&rot_2, (float)j - ((float)data->line_len[i] / 2), ((float)i - (float)data->len_y / 2) + 1, (*map)[i + 1][j].z, line);
-			init_rotations(&rot_1, data);
-			init_rotations(&rot_2, data);
-			projections(line, data, &rot_1, &rot_2);
-			if ((*map)[i + 1][j].z > ((*map)[i][j].z))
-				color = (*map)[i + 1][j].color.hex;
-			else
-				color = (*map)[i][j].color.hex;
-			draw_line(data, line, color);
-			j++;
-		}
+		draw_adjacent(i, map, data, line);
 		i++;
 	}
 	return (true);

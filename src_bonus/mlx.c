@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 03:23:16 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/23 02:07:01 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/16 09:06:49 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	img_init(t_data	*data)
 {
-	if (data->img.img)
+	if (data->img.img != 0)
 		mlx_destroy_image(data->mlx.mlx, data->img.img);
 	data->img.img = mlx_new_image(data->mlx.mlx, data->mlx.w_w, data->mlx.w_h);
 	data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel, &data->img.line_lenght, &data->img.endian);

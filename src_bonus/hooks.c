@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 00:27:38 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/24 03:39:23 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/16 10:43:23 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ static int	hooks_handler(int zazou, t_data *data)
 	if (zazou == XK_BackSpace && data->offset > 0)
 		data->offset = data->offset * 0.9;
 	if (zazou == XK_Up)
-		data->line.start_y = data->line.start_y - 5; 
+		data->line.start_y = data->line.start_y - 1; 
 	if (zazou == XK_Down)
-		data->line.start_y = data->line.start_y + 5; 
+		data->line.start_y = data->line.start_y + 1; 
 	if (zazou == XK_Left)
-		data->line.start_x = data->line.start_x - 5; 
+		data->line.start_x = data->line.start_x - 1; 
 	if (zazou == XK_Right)
-		data->line.start_x = data->line.start_x + 5;
+		data->line.start_x = data->line.start_x + 1;
 	if (zazou == XK_q)
  		data->angle.angle_x -= 5;
 	if (zazou == XK_w)

@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:47:14 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/23 02:08:09 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:57:22 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 #include "includes.h"
 #include "struct.h"
 
-float	x_projection(t_data *data, float x, float y)
+float	x_projection(t_data *data, float x, float y, float z)
 {
 	float new_x;
 
+	(void)z;
 	(void)y;
 	new_x = data->offset * x;
 	return (new_x);

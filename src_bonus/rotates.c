@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:04:54 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/22 17:06:57 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/16 11:04:55 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	init_rotations(t_rot *rotation, t_data *data)
 	if (data->angle.angle_y != 0)
 		rotate_y(rotation, data);
 }
-
-
 
 void	rotate_z(t_rot *rot, t_data *data)
 {
