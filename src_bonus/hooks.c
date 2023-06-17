@@ -60,6 +60,15 @@ static int	hooks_handler(int zazou, t_data *data)
  		data->angle.angle_z -= 5;
 	if (zazou == XK_x)
  		data->angle.angle_z += 5;
+	if (zazou == XK_c)
+	{
+		if (data->get_color == get_red)
+			data->get_color = get_point_color;
+		else if (data->get_color == get_point_color)
+			data->get_color = get_rotated_color;
+		else
+			data->get_color = get_red;
+	}
 	rendering(data);
 	return (1);
 }

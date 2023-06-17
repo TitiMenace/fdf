@@ -50,7 +50,11 @@ typedef struct	s_point
 		float	b_y;
 		float	start_x;
 		float	start_y;
-		
+		float	z1_origin;
+		float	z2_origin;
+		float	a_z;
+		float	b_z;
+
 }				t_point;
 
 typedef struct s_rot
@@ -58,6 +62,7 @@ typedef struct s_rot
 	float	x;
 	float	y;
 	float	z;
+	float	z_origin;
 }				t_rot;
 
 
@@ -88,6 +93,8 @@ typedef struct	s_angle
 }				t_angle;
 
 typedef struct	s_data
+				t_data;
+typedef struct	s_data
 {
 	t_angle angle;
 	t_map	**map;
@@ -97,6 +104,8 @@ typedef struct	s_data
 	int		*line_len;
 	int		len_y;
 	float	offset;
+	int	(*get_color)(t_data *data, float z_origin, float z_rotated);
+
 }				t_data;
 
 #endif

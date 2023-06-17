@@ -18,18 +18,18 @@ float	x_projection(t_data *data, float x, float y, float z)
 {
 	float new_x;
 
-	(void)z;
+//	(void)z;
 	(void)y;
 	new_x = data->offset * x;
-	return (new_x);
+	return (new_x + z * 20);
 }
 
 float	y_projection(t_data *data, float x, float y, float z)
 {
 	float new_y;
 
+//	(void)z;
 	(void)x;
-	(void)z;
 	new_y = data->offset * y;
-	return (new_y);
+	return (new_y + z * 20);
 }

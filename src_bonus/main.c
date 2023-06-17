@@ -54,6 +54,7 @@ void	init_mlx(t_data *data)
 	}
 	data->mlx.win = mlx_new_window(data->mlx.mlx, data->mlx.w_w, data->mlx.w_h, "fdf");
 	data->img.img = 0;
+	data->get_color = get_red;
 }
 
 void	init_offset(t_data *data)

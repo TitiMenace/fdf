@@ -15,6 +15,7 @@
 #include "includes.h"
 
 
+
 static int	ft_abs(int a)
 {
 	if (a > 0)
@@ -53,6 +54,7 @@ void	draw_line(t_data *data, t_point *seg, int couleur)
 {
 	t_line	utils;
 	int	err2;
+	(void)couleur;
 
 	init_s_line(&utils);
 	utils.dx = ft_abs((int)seg->b_x - (int)seg->a_x);
@@ -60,20 +62,23 @@ void	draw_line(t_data *data, t_point *seg, int couleur)
 	utils.sx = def_slope((int)seg->a_x, (int)seg->b_x);
 	utils.sy = def_slope((int)seg->a_y, (int)seg->b_y);
 	utils.err = def_error(utils.dx, utils.dy);
-	while (((int)seg->a_x != (int)seg->b_x || (int)seg->a_y != (int)seg->b_y) && (seg->a_x >= 0 && seg->a_x <= data->mlx.w_w) && (seg->a_y >= 0 && seg->a_y <= data->mlx.w_h))
+
+	if ((seg->a_x >= 0 && seg->a_x <= data->mlx.w_w) && (seg->a_y >= 0 && seg->a_y <= data->mlx.w_h))
 	{
-		if ((seg->a_x >= 0 && seg->a_x <= data->mlx.w_w) && (seg->a_y >= 0 && seg->a_y <= data->mlx.w_h))
-			my_mlx_pixel_put(data, (int)seg->a_x, (int)seg->a_y, couleur);
-		err2 = utils.err;
-		if (err2 > -utils.dx)
+		while (((int)seg->a_x != (int)seg->b_x || (int)seg->a_y != (int)seg->b_y) && (seg->a_x >= 0 && seg->a_x <= data->mlx.w_w) && (seg->a_y >= 0 && seg->a_y <= data->mlx.w_h))
 		{
-			utils.err -= utils.dy;
-			seg->a_x += utils.sx;
-		}
-		if (err2 < utils.dy)
-		{
-			utils.err += utils.dx;
-			seg->a_y += utils.sy;
+			my_mlx_pixel_put(data, (int)seg->a_x, (int)seg->a_y, data->get_color(data, seg->z1_origin, seg->a_z));
+			err2 = utils.err;
+			if (err2 > -utils.dx)
+			{
+				utils.err -= utils.dy;
+				seg->a_x += utils.sx;
+			}
+			if (err2 < utils.dy)
+			{
+				utils.err += utils.dx;
+				seg->a_y += utils.sy;
+			}
 		}
 	}
 }

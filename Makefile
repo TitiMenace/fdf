@@ -16,7 +16,7 @@ SRC_FILES		=	main.c fdf_utils.c get_next_line.c get_next_line_utils.c \
 
 SRC_FILES_BONUS	=	main.c fdf_utils.c get_next_line.c get_next_line_utils.c \
 					check_map.c parsing.c draw_map.c draw_line.c \
-					get_color.c mlx.c hooks.c isometric.c rotates.c \
+					get_color.c mlx.c hooks.c isometric.c rotates.c color.c\
 
 SRC_DIR_BONUS	= src_bonus
 
