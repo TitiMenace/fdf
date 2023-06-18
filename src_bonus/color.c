@@ -3,6 +3,36 @@
 #include "includes.h"
 
 
+unsigned int get_interpolated_color(unsigned int start_color, unsigned int end_color, double t)
+{
+	unsigned char	start_r;
+	unsigned char 	start_g;
+	unsigned char	start_b;
+
+	unsigned char 	end_r;
+	unsigned char	end_g;
+	unsigned char	end_b;
+
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+	
+	start_r = (start_color >> 16) & 0xFF;
+	start_g = (start_color >> 8) & 0xFF;
+	start_b = start_color & 0xFF;
+
+	end_r = (end_color >> 16) & 0xFF;
+	end_g = (end_color >> 8) & 0xFF;
+	end_b = end_color & 0xFF;
+
+	r = (float)(start_r + (end_r - start_r) * t);
+	g = (float)(start_g + (end_g - start_g) * t);
+	b = (float)(start_b + (end_b - start_b) * t);
+
+	return ((r << 16) | (g << 8) | b);
+}
+
+
 
 float	max(float a, float b)
 {

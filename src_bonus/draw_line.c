@@ -6,15 +6,13 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:55:11 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/13 03:56:57 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/18 23:53:49 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "struct.h"
 #include "fdf.h"
 #include "includes.h"
-
-
 
 static int	ft_abs(int a)
 {
@@ -55,6 +53,9 @@ void	draw_line(t_data *data, t_point *seg, int couleur)
 	t_line	utils;
 	int	err2;
 	(void)couleur;
+	double	scale;
+	double	t;
+	double	dt;
 
 	init_s_line(&utils);
 	utils.dx = ft_abs((int)seg->b_x - (int)seg->a_x);
@@ -62,12 +63,17 @@ void	draw_line(t_data *data, t_point *seg, int couleur)
 	utils.sx = def_slope((int)seg->a_x, (int)seg->b_x);
 	utils.sy = def_slope((int)seg->a_y, (int)seg->b_y);
 	utils.err = def_error(utils.dx, utils.dy);
-
+	
+	t = 0.0;
+	dt = 1.0 / (sqrt(utils.dx * utils.dx + utils.dy * utils.dy));
+	
 	if ((seg->a_x >= 0 && seg->a_x <= data->mlx.w_w) && (seg->a_y >= 0 && seg->a_y <= data->mlx.w_h))
 	{
 		while (((int)seg->a_x != (int)seg->b_x || (int)seg->a_y != (int)seg->b_y) && (seg->a_x >= 0 && seg->a_x <= data->mlx.w_w) && (seg->a_y >= 0 && seg->a_y <= data->mlx.w_h))
 		{
-			my_mlx_pixel_put(data, (int)seg->a_x, (int)seg->a_y, data->get_color(data, seg->z1_origin, seg->a_z));
+			t += dt;
+			scale = ((seg->z1_origin + t * (seg->z2_origin - seg->z1_origin)) - 0) / (9 - 0);
+			my_mlx_pixel_put(data, (int)seg->a_x, (int)seg->a_y, get_interpolated_color(0x00FF0000, 0x000000FF, scale));
 			err2 = utils.err;
 			if (err2 > -utils.dx)
 			{
