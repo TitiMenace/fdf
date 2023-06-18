@@ -14,22 +14,33 @@
 #include "includes.h"
 #include "struct.h"
 
+float	get_focal_lenght(float x, float y, float z)
+{
+	return (sqrt(x * x + y * y + z * z));
+}
+
 float	x_projection(t_data *data, float x, float y, float z)
 {
 	float new_x;
+	float focal_lenght;
 
-//	(void)z;
-	(void)y;
-	new_x = data->offset * x;
-	return (new_x + z * 20);
+	z+=20;
+	focal_lenght = get_focal_lenght(x, y, z);
+	if (focal_lenght == 0)
+		focal_lenght = 0.001;
+	new_x = data->offset * x / focal_lenght;
+	return (new_x);
 }
 
 float	y_projection(t_data *data, float x, float y, float z)
 {
 	float new_y;
-
-//	(void)z;
-	(void)x;
-	new_y = data->offset * y;
-	return (new_y + z * 20);
+	float focal_lenght;
+		
+	z+=20;
+	focal_lenght = get_focal_lenght(x, y, z);
+	if (focal_lenght == 0)
+		focal_lenght = 0.001;
+	new_y = data->offset * y / focal_lenght;
+	return (new_y);
 }
