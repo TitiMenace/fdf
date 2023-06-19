@@ -6,12 +6,13 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:06:31 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/22 20:45:10 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:21:26 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
 
 typedef union	s_color
 {
@@ -104,6 +105,10 @@ typedef struct	s_data
 	int		*line_len;
 	int		len_y;
 	float	offset;
+	unsigned int	start_color;
+	unsigned int	end_color;
+	float	z_max;
+	float	z_min;
 	int	(*get_color)(t_data *data, float z_origin, float z_rotated);
 
 }				t_data;

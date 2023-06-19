@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:40:23 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/14 21:07:28 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:31:56 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,18 @@ bool	parsing_map(char *buffer, t_map ***map, t_data *data)
 		while (x < data->line_len[y])
 		{
 			(*map)[y][x].z = ft_atoi(buffer, &index);
+			if (y == 0 && x == 0)
+			{
+				data->z_max = (*map)[y][x].z;
+				data->z_min = (*map)[y][x].z;
+			}
+			else
+			{
+				if ((*map)[y][x].z >= data->z_max)
+					data->z_max = (*map)[y][x].z;
+				else if ((*map)[y][x].z <= data->z_min)
+					data->z_min = (*map)[y][x].z;
+			}
 			if (buffer[index] == ',')
 			{
 				while (buffer[index - 1] != 'x')

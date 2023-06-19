@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:04:54 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/16 11:04:55 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/20 00:45:49 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	init_special_rotations(t_rot *rotation, t_data *data)
 	if (data->angle.angle_z != 0)
 		rotate_z(rotation, data);
 }
-
-
 
 void	init_rotations(t_rot *rotation, t_data *data)
 {
@@ -76,7 +74,7 @@ void	rotate_y(t_rot *rot, t_data *data)
 	s_theta = sin(theta);
 
 	x_tmp = rot->x * c_theta - rot->z * s_theta;
-	z_tmp = -(rot->x) * s_theta + rot->z * c_theta;
+	z_tmp = rot->x * s_theta + rot->z * c_theta;
 
 	rot->x = x_tmp;
 	rot->z = z_tmp;

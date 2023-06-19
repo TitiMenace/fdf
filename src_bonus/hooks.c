@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 00:27:38 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/16 10:43:23 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:05:14 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,29 @@ static int	hooks_handler(int zazou, t_data *data)
  		data->angle.angle_z -= 5;
 	if (zazou == XK_x)
  		data->angle.angle_z += 5;
+	if (zazou == XK_g)
+	{
+		if(data->end_color == 0x00FF00FF)
+		{
+			data->start_color = 0x000000FF;
+			data->end_color = 0x0000FFFF;
+		}
+		else if (data->start_color == 0x000000FF)
+		{
+			data->start_color = 0x00FF0000;
+			data->end_color = 0x00FFFF00;
+		}
+		else if (data->start_color == 0x00FF0000)
+		{
+			data->start_color = 0x007F00FF;
+			data->end_color = 0x00FF007F;
+		}
+		else
+		{
+			data->start_color = 0x00FF00FF;
+			data->end_color = 0x00FF00FF;
+		}
+	}
 	if (zazou == XK_c)
 	{
 		if (data->get_color == get_red)

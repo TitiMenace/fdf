@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:55:11 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/18 23:53:49 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:38:15 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	draw_line(t_data *data, t_point *seg, int couleur)
 		while (((int)seg->a_x != (int)seg->b_x || (int)seg->a_y != (int)seg->b_y) && (seg->a_x >= 0 && seg->a_x <= data->mlx.w_w) && (seg->a_y >= 0 && seg->a_y <= data->mlx.w_h))
 		{
 			t += dt;
-			scale = ((seg->z1_origin + t * (seg->z2_origin - seg->z1_origin)) - 0) / (9 - 0);
-			my_mlx_pixel_put(data, (int)seg->a_x, (int)seg->a_y, get_interpolated_color(0x00FF0000, 0x000000FF, scale));
+			scale = ((seg->z1_origin + t * (seg->z2_origin - seg->z1_origin)) - data->z_min) / (data->z_max - data->z_min);
+			my_mlx_pixel_put(data, (int)seg->a_x, (int)seg->a_y, get_interpolated_color(data->start_color, data->end_color, scale));
 			err2 = utils.err;
 			if (err2 > -utils.dx)
 			{
