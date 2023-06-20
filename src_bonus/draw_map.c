@@ -72,7 +72,7 @@ bool	draw_adjacent(int i, t_map ***map, t_data *data, t_point *line)
 		if (j + 1 == data->line_len[i] && i + 1 != data->len_y)
 		{
 			init_rot(&down, (float)j - ((float)data->line_len[i] / 2), ((float)i - (float)data->len_y / 2) + 1, (*map)[i + 1][j].z, line);
-			init_rotations(&down, data);
+			init_special_rotations(&down, data);
 			draw(&origin, &down, data, line, 0x00ff0000);
 		}
 		else if (i + 1 == data->len_y)
@@ -88,7 +88,7 @@ bool	draw_adjacent(int i, t_map ***map, t_data *data, t_point *line)
 			init_rot(&right, ((float)j - (float)data->line_len[i] / 2) + 1, (float)i - (float)data->len_y / 2, (*map)[i][j + 1].z, line);
 			init_rot(&down, (float)j - ((float)data->line_len[i] / 2), ((float)i - (float)data->len_y / 2) + 1, (*map)[i + 1][j].z, line);
 			init_rotations(&right, data);
-			init_rotations(&down, data);
+			init_special_rotations(&down, data);
 			draw(&origin, &right, data, line, 0x00ff0000);
 			draw(&origin, &down, data, line, 0x00ff0000);
 		}

@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 01:38:40 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/16 14:33:10 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/20 01:29:59 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int	main(int ac, char **av)
 	init_mlx(&data);
 	init_line(&(data.line), &data);
 	init_angle(&data);
+	data.img.img = mlx_new_image(data.mlx.mlx, data.mlx.w_w, data.mlx.w_h);
+	data.img.addr = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel, &data.img.line_lenght, &data.img.endian);
 	rendering(&data);	
 	init_hooks(&data);	
 	mlx_loop(data.mlx.mlx);

@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 00:27:38 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/19 17:05:14 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/20 00:55:49 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static int	hooks_handler(int zazou, t_data *data)
 	if (data->angle.angle_z >= 360 || data->angle.angle_z <= -360)
 		data->angle.angle_z = 0;
 		*/
+	//if (zazou == XK_p)
+		
 	if (zazou == XK_Escape)
 		destroy(data);
 	if (zazou == XK_Return)
