@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 01:38:40 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/20 01:29:59 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/21 03:44:31 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,12 @@ void	init_mlx(t_data *data)
 	}
 	data->mlx.win = mlx_new_window(data->mlx.mlx, data->mlx.w_w, data->mlx.w_h, "fdf");
 	data->img.img = 0;
-	data->get_color = get_red;
+	data->start_color = 0x00FFFFFF;
+	data->end_color = 0;
+	data->fov = 30;
+	data->special_rendering = false;
+	data->isometric = true;
+//	data->get_color = get_red;
 }
 
 void	init_offset(t_data *data)

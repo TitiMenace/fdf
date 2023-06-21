@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 03:23:16 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/20 07:02:53 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/21 04:41:56 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	img_init(t_data	*data)
 	{
 		for (int x = 0; x < data->mlx.w_w; x++)
 		{
-			my_mlx_pixel_put(data, x, y, 0xEE000000);
+			my_mlx_pixel_put(data, x, y, 0xF0000000);
 		}
 	}
 }
@@ -61,4 +61,5 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	 //*((int *)(data->img.addr) + ((y << 10) + (y << 9) + (y << 8) + (y << 7) + x)) = color;
 	//*pixel_addr = *((t_v3uc *)&ccolor);
 	*pixel_addr = color;
+	//dprintf(2, "%d %d,%d\n", *pixel_addr, x, y);
 }

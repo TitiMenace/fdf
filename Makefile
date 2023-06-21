@@ -6,7 +6,7 @@
 #    By: tschecro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/19 05:15:52 by tschecro          #+#    #+#              #
-#    Updated: 2023/05/22 15:23:12 by tschecro         ###   ########.fr        #
+#    Updated: 2023/06/21 02:39:20 by tschecro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ $(NAME)	:	$(OBJ) $(LIBS)
 $(OBJ_DIR)/%.o 		:	$(SRC_DIR)/%.c
 						@printf "\033[0;33m Generating fdf object... %-38.38s \r" $@
 						@mkdir -p $(OBJ_DIR)
-						@$(CC) -Wall -Wextra -Werror -g3 -c -I $(HEADER) $< -o $@
+						@$(CC) -Wall -Wextra -Werror -g3 -fsanitize=address -c -I $(HEADER) $< -o $@
 
 clean	:
 			rm -rf $(OBJ_DIR)

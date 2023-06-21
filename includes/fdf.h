@@ -6,7 +6,7 @@
 /*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2023/06/18 22:12:42 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/21 03:47:22 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 /* -------------------------------------------------------------------------- */
 /*                           FILE = src_bonus/mlx.c                           */
 /* -------------------------------------------------------------------------- */
+void	ft_memset(void *ptr, int value, size_t count);
 void	img_init(t_data	*data);
+int color_from_alpha(unsigned int old_color,unsigned  int new_color, float alpha);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 /* -------------------------------------------------------------------------- */
@@ -112,8 +114,8 @@ void rotate_x(t_rot *rot, t_data *data);
 /*                        FILE = src_bonus/isometric.c                        */
 /* -------------------------------------------------------------------------- */
 float	get_focal_lenght(float x, float y, float z);
-float	x_projection(t_data *data, float x, float y, float z);
-float	y_projection(t_data *data, float x, float y, float z);
+float	x_projection(t_data *data, float x, float z);
+float	y_projection(t_data *data, float y, float z);
 
 /* -------------------------------------------------------------------------- */
 /*                         FILE = src_bonus/square.c                          */

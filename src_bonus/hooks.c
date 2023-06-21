@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 00:27:38 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/20 00:55:49 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/21 03:45:36 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,25 @@ static int	hooks_handler(int zazou, t_data *data)
 		*/
 	//if (zazou == XK_p)
 		
+	if (zazou == XK_p)
+	{
+		if (data->isometric == true)
+			data->isometric = false;
+		else
+			data->isometric = true;
+	}
+
+	if (zazou == XK_m)
+	{
+		if (data->special_rendering == true)
+			data->special_rendering = false;
+		else
+			data->special_rendering = true;
+	}
+	if (zazou == XK_y)
+		data->fov+=5;
+	if (zazou == XK_t)
+		data->fov-=5;
 	if (zazou == XK_Escape)
 		destroy(data);
 	if (zazou == XK_Return)
@@ -85,7 +104,7 @@ static int	hooks_handler(int zazou, t_data *data)
 			data->end_color = 0x00FF00FF;
 		}
 	}
-	if (zazou == XK_c)
+/*	if (zazou == XK_c)
 	{
 		if (data->get_color == get_red)
 			data->get_color = get_point_color;
@@ -93,7 +112,7 @@ static int	hooks_handler(int zazou, t_data *data)
 			data->get_color = get_rotated_color;
 		else
 			data->get_color = get_red;
-	}
+	}*/
 	rendering(data);
 	return (1);
 }

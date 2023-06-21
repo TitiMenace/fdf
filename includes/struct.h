@@ -6,13 +6,15 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:06:31 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/20 04:01:48 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/21 03:42:51 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
+
+# include <stdbool.h>
 
 typedef unsigned char	t_v3uc __attribute__((vector_size (16)));
 
@@ -111,9 +113,10 @@ typedef struct	s_data
 	unsigned int	end_color;
 	float	z_max;
 	float	z_min;
-	//bool	isometric;
+	int fov;
+	bool	special_rendering;
+	bool	isometric;
 	int	(*get_color)(t_data *data, float z_origin, float z_rotated);
-
 }				t_data;
 
 #endif
