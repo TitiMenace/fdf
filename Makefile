@@ -6,7 +6,7 @@
 #    By: tschecro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/19 05:15:52 by tschecro          #+#    #+#              #
-#    Updated: 2023/06/21 02:39:20 by tschecro         ###   ########.fr        #
+#    Updated: 2023/06/21 06:01:46 by tschecro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,7 @@ $(BONUS_NAME)	:	 	$(OBJ_BONUS) $(LIBS)
 $(OBJ_BONUS_DIR)/%.o 		:	$(SRC_DIR_BONUS)/%.c
 						@printf "\033[0;33m Generating fdf object... %-38.38s \r" $@
 						@mkdir -p $(OBJ_BONUS_DIR)
-						@$(CC) -Wall -Wextra -Werror -g3 -c -I $(HEADER) $< -o $@
+						@$(CC) -Wall -Wextra -Werror -O3 -g3 -c -I $(HEADER) $< -o $@
 
 $(LIBS)	:				
 			make -C $(LIBS_FOLDER)/$(MLX_DIR)

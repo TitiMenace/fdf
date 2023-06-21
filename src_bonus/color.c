@@ -3,7 +3,7 @@
 #include "includes.h"
 
 
-unsigned int get_interpolated_color(unsigned int start_color, unsigned int end_color, double t)
+unsigned int get_interpolated_color(t_data *data, unsigned int start_color, unsigned int end_color, double t)
 {
 	unsigned char	start_r;
 	unsigned char 	start_g;
@@ -17,6 +17,9 @@ unsigned int get_interpolated_color(unsigned int start_color, unsigned int end_c
 	unsigned char	g;
 	unsigned char	b;
 	
+	if (data->z_min == data->z_max)
+		return (0x00FF0000);
+
 	start_r = (start_color >> 16) & 0xFF;
 	start_g = (start_color >> 8) & 0xFF;
 	start_b = start_color & 0xFF;

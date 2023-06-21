@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 01:38:40 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/21 03:44:31 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/21 06:28:35 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	init_line(t_point *line, t_data *data)
 
 void	rendering(t_data *data)
 {
+	data->angle.angle_x -= .5;
 	img_init(data);
 	draw_map(&(data->map), data, &(data->line));
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->img.img, 0, 0);

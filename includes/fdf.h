@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdfi.h                                             :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2023/06/21 03:47:22 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/21 05:28:32 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	init_hooks(t_data *data);
 /* -------------------------------------------------------------------------- */
 /*                          FILE = src_bonus/color.c                          */
 /* -------------------------------------------------------------------------- */
-unsigned int get_interpolated_color(unsigned int start_color, unsigned int end_color, double t);
+unsigned int get_interpolated_color(t_data *data, unsigned int start_color, unsigned int end_color, double t);
 float	max(float a, float b);
 float	min(float a, float b);
 int	argb_to_int(int a, int r, int g, int b);

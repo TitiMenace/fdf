@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 00:27:38 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/21 03:45:36 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/21 06:20:48 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ int	destroy(t_data *data)
 	exit(EXIT_SUCCESS);
 	return(1);
 
+}
+
+static int	loop_hook_handler(t_data *data)
+{
+	rendering(data);
+	return (0);
 }
 
 static int	hooks_handler(int zazou, t_data *data)
@@ -128,5 +134,6 @@ void	init_hooks(t_data *data)
 {
 	mlx_hook(data->mlx.win, 17, (1L << 17), cross_button, data);
 	mlx_hook(data->mlx.win, 2, KeyPressMask, hooks_handler, data);
+	mlx_loop_hook(data->mlx.mlx, loop_hook_handler, data);
 }
 

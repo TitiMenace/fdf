@@ -83,7 +83,7 @@ bool	draw_adjacent(int i, t_map ***map, t_data *data, t_point *line)
 			if (j + 1 == data->line_len[i])
 				break;
 			init_rot(&right, ((float)j - (float)data->line_len[i] / 2) + 1, (float)i - (float)data->len_y / 2, (*map)[i][j + 1].z, line);
-			init_rotations(&right, data);
+			init_special_rotations(&right, data);
 			draw(&origin, &right, data, line, 0x00ff0000);
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 03:23:16 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/21 04:41:56 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/21 06:34:07 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,18 @@ void	img_init(t_data	*data)
 	{
 		for (int x = 0; x < data->mlx.w_w; x++)
 		{
-			my_mlx_pixel_put(data, x, y, 0xF0000000);
+			my_mlx_pixel_put(data, x, y, 0xFC000000);
 		}
 	}
 }
 
 int color_from_alpha(unsigned int old_color,unsigned  int new_color, float alpha)
 {
+	char	*old_col;
+	char	*new_col;
+
+	old_col = (char *)&old_color;
+	new_col = (char *)&new_color;
 	unsigned int r = ((old_color << 8) >> 24) * alpha + ((new_color << 8) >> 24) * (1. - alpha);
 	unsigned int g = ((old_color << 16) >> 24) * alpha + ((new_color << 16) >> 24) * (1. - alpha);
 	unsigned int b = ((old_color << 24) >> 24) * alpha + ((new_color << 24) >> 24) * (1. - alpha);
