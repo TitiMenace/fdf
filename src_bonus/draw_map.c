@@ -65,6 +65,7 @@ bool	draw_adjacent(int i, t_map ***map, t_data *data, t_point *line)
 		if	(j == 0)
 		{
 			init_rot(&origin, (float)j - ((float)data->line_len[i] / 2), (float)i - (float)data->len_y / 2, (*map)[i][j].z, line);
+			//init_rot(&origin, (float)j, (float)i, (*map)[i][j].z, line);
 			init_rotations(&origin, data);
 		}
 		else
@@ -72,6 +73,7 @@ bool	draw_adjacent(int i, t_map ***map, t_data *data, t_point *line)
 		if (j + 1 == data->line_len[i] && i + 1 != data->len_y)
 		{
 			init_rot(&down, (float)j - ((float)data->line_len[i] / 2), ((float)i - (float)data->len_y / 2) + 1, (*map)[i + 1][j].z, line);
+			//init_rot(&down, (float)j, (float)i + 1, (*map)[i + 1][j].z, line);
 			if (data->special_rendering == true)
 				init_special_rotations(&down, data);
 			else
@@ -83,13 +85,16 @@ bool	draw_adjacent(int i, t_map ***map, t_data *data, t_point *line)
 			if (j + 1 == data->line_len[i])
 				break;
 			init_rot(&right, ((float)j - (float)data->line_len[i] / 2) + 1, (float)i - (float)data->len_y / 2, (*map)[i][j + 1].z, line);
+			//init_rot(&right, (float)j + 1, (float)i, (*map)[i][j + 1].z, line);
 			init_special_rotations(&right, data);
 			draw(&origin, &right, data, line, 0x00ff0000);
 		}
 		else
 		{
 			init_rot(&right, ((float)j - (float)data->line_len[i] / 2) + 1, (float)i - (float)data->len_y / 2, (*map)[i][j + 1].z, line);
+			//init_rot(&right, (float)j + 1, (float)i, (*map)[i][j + 1].z, line);
 			init_rot(&down, (float)j - ((float)data->line_len[i] / 2), ((float)i - (float)data->len_y / 2) + 1, (*map)[i + 1][j].z, line);
+			//init_rot(&down, (float)j, (float)i + 1, (*map)[i + 1][j].z, line);
 			init_rotations(&right, data);
 			if (data->special_rendering == true)
 				init_special_rotations(&down, data);
