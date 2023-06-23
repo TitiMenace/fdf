@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 00:27:38 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/21 06:20:48 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/23 22:22:42 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,21 @@ static int	hooks_handler(int zazou, t_data *data)
 		data->angle.angle_z = 0;
 		*/
 	//if (zazou == XK_p)
-		
+//	if (zazou == XK_f)
+//	{
+//		if (data->set_cinematic == true)
+//			data->set_cinematic = false;
+//		else
+//			data->set_cinematic = true;
+//	}	
+	if (zazou == XK_b && data->alpha + 10 <= 255)
+		data->alpha += 10;
+	if (zazou == XK_v && data->alpha - 10 >= 0)
+		data->alpha -= 10;
+	if (zazou == XK_k && data->cinematic >= 0)
+		data->cinematic -= 0.1;
+	if (zazou == XK_l && data->cinematic <= 1)
+		data->cinematic += 0.1;
 	if (zazou == XK_p)
 	{
 		if (data->isometric == true)
@@ -58,9 +72,9 @@ static int	hooks_handler(int zazou, t_data *data)
 			data->special_rendering = true;
 	}
 	if (zazou == XK_y)
-		data->fov+=5;
+		data->fov+=1;
 	if (zazou == XK_t)
-		data->fov-=5;
+		data->fov-=1;
 	if (zazou == XK_Escape)
 		destroy(data);
 	if (zazou == XK_Return)
@@ -134,6 +148,7 @@ void	init_hooks(t_data *data)
 {
 	mlx_hook(data->mlx.win, 17, (1L << 17), cross_button, data);
 	mlx_hook(data->mlx.win, 2, KeyPressMask, hooks_handler, data);
+	//if (data->set_cinematic == true)
 	mlx_loop_hook(data->mlx.mlx, loop_hook_handler, data);
 }
 

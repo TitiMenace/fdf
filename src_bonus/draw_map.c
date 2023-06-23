@@ -15,10 +15,10 @@
 
 void	projections(t_point *line, t_data *data, t_rot *r1, t_rot *r2)
 {
-	line->a_x = line->start_x + x_projection(data, r1->x, r1->z);
-	line->a_y = line->start_y + y_projection(data, r1->y, r1->z);
-	line->b_x = line->start_x + x_projection(data, r2->x, r2->z);
-	line->b_y = line->start_y + y_projection(data, r2->y, r2->z);
+	line->a_x = (int)line->start_x + x_projection(data, r1->x, r1->z);
+	line->a_y = (int)line->start_y + y_projection(data, r1->y, r1->z);
+	line->b_x = (int)line->start_x + x_projection(data, r2->x, r2->z);
+	line->b_y = (int)line->start_y + y_projection(data, r2->y, r2->z);
 	line->z1_origin = r1->z_origin;
 	line->z2_origin = r2->z_origin;
 	line->a_z = r1->z;
@@ -86,7 +86,10 @@ bool	draw_adjacent(int i, t_map ***map, t_data *data, t_point *line)
 				break;
 			init_rot(&right, ((float)j - (float)data->line_len[i] / 2) + 1, (float)i - (float)data->len_y / 2, (*map)[i][j + 1].z, line);
 			//init_rot(&right, (float)j + 1, (float)i, (*map)[i][j + 1].z, line);
-			init_special_rotations(&right, data);
+			if (data->special_rendering == true)
+				init_special_rotations(&right, data);
+			else
+				init_rotations(&right, data);
 			draw(&origin, &right, data, line, 0x00ff0000);
 		}
 		else

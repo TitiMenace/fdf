@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:47:14 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/21 03:46:36 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/23 22:52:56 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ float	x_projection(t_data *data, float x, float z)
 	float new_x;
 
 	z+= data->fov;
-	
 	if (data->isometric == true)
 		new_x = x * data->offset;
 	else
+	{
+		data->offset += data->fov;
 		new_x = x * (data->offset / z);
+	}
 	return (new_x);
 }
 
@@ -40,6 +42,9 @@ float	y_projection(t_data *data, float y, float z)
 	if (data->isometric == true)
 		new_y = y * data->offset;
 	else
+	{
+		data->offset += data->fov;
 		new_y = y * (data->offset / z );
+	}
 	return (new_y);
 }

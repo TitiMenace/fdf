@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:06:31 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/21 03:42:51 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/23 20:43:35 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,16 @@ typedef struct	s_mlx
 
 typedef struct	s_point
 {
-		float	a_x;
-		float	a_y;
-		float	b_x;
-		float	b_y;
-		float	start_x;
-		float	start_y;
-		float	z1_origin;
-		float	z2_origin;
-		float	a_z;
-		float	b_z;
+		int		a_x;
+		int		a_y;
+		int		b_x;
+		int		b_y;
+		int		start_x;
+		int		start_y;
+		int		z1_origin;
+		int		z2_origin;
+		int		a_z;
+		int		b_z;
 
 }				t_point;
 
@@ -116,6 +116,9 @@ typedef struct	s_data
 	int fov;
 	bool	special_rendering;
 	bool	isometric;
+	float	cinematic;
+	unsigned char	alpha;
+	bool	set_cinematic;
 	int	(*get_color)(t_data *data, float z_origin, float z_rotated);
 }				t_data;
 

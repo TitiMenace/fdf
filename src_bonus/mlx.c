@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 03:23:16 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/21 06:34:07 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:44:26 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,17 @@ void	ft_memset(void *ptr, int value, size_t count)
 	}
 }
 
+
 void	img_init(t_data	*data)
 {
-	//dprintf(2, "test\n");
-	//ft_memset(data->img.addr, 0xFF000000, data->mlx.w_w * data->mlx.w_h);  
+	unsigned int	alpha;
+
+	alpha = (data->alpha << 24);
 	for (int y = 0; y < data->mlx.w_h; y++)
 	{
 		for (int x = 0; x < data->mlx.w_w; x++)
 		{
-			my_mlx_pixel_put(data, x, y, 0xFC000000);
+			my_mlx_pixel_put(data, x, y, alpha);
 		}
 	}
 }

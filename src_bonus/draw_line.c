@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:55:11 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/21 05:28:55 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/23 22:31:11 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ void	draw_line(t_data *data, t_point *seg, int couleur)
 	double	dt;
 
 	init_s_line(&utils);
-	utils.dx = ft_abs((int)seg->b_x - (int)seg->a_x);
-	utils.dy = ft_abs((int)seg->b_y - (int)seg->a_y);
-	utils.sx = def_slope((int)seg->a_x, (int)seg->b_x);
-	utils.sy = def_slope((int)seg->a_y, (int)seg->b_y);
+	utils.dx = ft_abs(seg->b_x - seg->a_x);
+	utils.dy = ft_abs(seg->b_y - seg->a_y);
+	utils.sx = def_slope(seg->a_x, seg->b_x);
+	utils.sy = def_slope(seg->a_y, seg->b_y);
 	utils.err = def_error(utils.dx, utils.dy);
 	
 	t = 0.0;
@@ -69,11 +69,11 @@ void	draw_line(t_data *data, t_point *seg, int couleur)
 	
 	if ((seg->a_x >= 0 && seg->a_x <= data->mlx.w_w) && (seg->a_y >= 0 && seg->a_y <= data->mlx.w_h))
 	{
-		while (((int)seg->a_x != (int)seg->b_x || (int)seg->a_y != (int)seg->b_y) && (seg->a_x >= 0 && seg->a_x <= data->mlx.w_w) && (seg->a_y >= 0 && seg->a_y <= data->mlx.w_h))
+		while ((seg->a_x != seg->b_x || seg->a_y != seg->b_y) && (seg->a_x >= 0 && seg->a_x <= data->mlx.w_w) && (seg->a_y >= 0 && seg->a_y <= data->mlx.w_h && (seg->a_z + data->fov >= 0 && seg->b_z + data->fov >= 0)))
 		{
 			t += dt;
 			scale = ((seg->z1_origin + t * (seg->z2_origin - seg->z1_origin)) - data->z_min) / (data->z_max - data->z_min);
-			my_mlx_pixel_put(data, (int)seg->a_x, (int)seg->a_y, get_interpolated_color(data, data->start_color, data->end_color, scale));
+			my_mlx_pixel_put(data, seg->a_x, seg->a_y, get_interpolated_color(data, data->start_color, data->end_color, scale));
 			err2 = utils.err;
 			if (err2 > -utils.dx)
 			{

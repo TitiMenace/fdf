@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 01:38:40 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/21 06:28:35 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/23 22:49:43 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,20 @@ void	init_mlx(t_data *data)
 	data->special_rendering = false;
 	data->isometric = true;
 //	data->get_color = get_red;
+	data->cinematic = 1;
+	data->alpha = 0;
+	data->set_cinematic = false;
 }
 
 void	init_offset(t_data *data)
 {
-	data->offset = OFFSET + 1;
+	int	biggest_size;
+
+	biggest_size = get_biggest_len(data);
+	if (biggest_size < data->len_y)
+		biggest_size = data->len_y;
+
+	data->offset = data->mlx.w_h / biggest_size;
 }
 
 void	init_line(t_point *line, t_data *data)
@@ -75,7 +84,7 @@ void	init_line(t_point *line, t_data *data)
 
 void	rendering(t_data *data)
 {
-	data->angle.angle_x -= .5;
+	data->angle.angle_x -= data->cinematic;
 	img_init(data);
 	draw_map(&(data->map), data, &(data->line));
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->img.img, 0, 0);
@@ -92,8 +101,8 @@ int	main(int ac, char **av)
 		return (write(2, "Incorrect format !\n", 19));
 	if (!init_map(av[1], &(data.map), &data))
 		return (write(2, "Error\n", 6));
-	init_offset(&data);
 	init_mlx(&data);
+	init_offset(&data);
 	init_line(&(data.line), &data);
 	init_angle(&data);
 	data.img.img = mlx_new_image(data.mlx.mlx, data.mlx.w_w, data.mlx.w_h);
