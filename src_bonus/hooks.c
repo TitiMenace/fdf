@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 00:27:38 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/23 22:22:42 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:58:15 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	destroy(t_data *data)
 
 static int	loop_hook_handler(t_data *data)
 {
-	rendering(data);
+	if (data->set_cinematic == true)
+		rendering(data);
 	return (0);
 }
 
@@ -41,13 +42,13 @@ static int	hooks_handler(int zazou, t_data *data)
 		data->angle.angle_z = 0;
 		*/
 	//if (zazou == XK_p)
-//	if (zazou == XK_f)
-//	{
-//		if (data->set_cinematic == true)
-//			data->set_cinematic = false;
-//		else
-//			data->set_cinematic = true;
-//	}	
+	if (zazou == XK_f)
+	{
+		if (data->set_cinematic == true)
+			data->set_cinematic = false;
+		else
+			data->set_cinematic = true;
+	}	
 	if (zazou == XK_b && data->alpha + 10 <= 255)
 		data->alpha += 10;
 	if (zazou == XK_v && data->alpha - 10 >= 0)
@@ -123,6 +124,14 @@ static int	hooks_handler(int zazou, t_data *data)
 			data->start_color = 0x00FF00FF;
 			data->end_color = 0x00FF00FF;
 		}
+	}
+	if (zazou == XK_u)
+	{
+		if (data->set_alpha_mode == false)
+			data->set_alpha_mode = true;
+		else
+			data->set_alpha_mode = false;
+
 	}
 /*	if (zazou == XK_c)
 	{

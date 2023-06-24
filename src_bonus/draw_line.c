@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:55:11 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/23 22:31:11 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:08:06 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	draw_line(t_data *data, t_point *seg, int couleur)
 	
 	if ((seg->a_x >= 0 && seg->a_x <= data->mlx.w_w) && (seg->a_y >= 0 && seg->a_y <= data->mlx.w_h))
 	{
-		while ((seg->a_x != seg->b_x || seg->a_y != seg->b_y) && (seg->a_x >= 0 && seg->a_x <= data->mlx.w_w) && (seg->a_y >= 0 && seg->a_y <= data->mlx.w_h && (seg->a_z + data->fov >= 0 && seg->b_z + data->fov >= 0)))
+		while ((seg->a_x != seg->b_x || seg->a_y != seg->b_y) && (seg->a_x >= 0 && seg->a_x <= data->mlx.w_w) && (seg->a_y >= 0 && seg->a_y <= data->mlx.w_h && !(data->isometric == false && (seg->a_z + data->fov <= 0 && seg->b_z + data->fov <= 0))))
 		{
 			t += dt;
 			scale = ((seg->z1_origin + t * (seg->z2_origin - seg->z1_origin)) - data->z_min) / (data->z_max - data->z_min);

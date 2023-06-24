@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 03:23:16 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/23 19:44:26 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:00:01 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,23 @@ void	ft_memset(void *ptr, int value, size_t count)
 void	img_init(t_data	*data)
 {
 	unsigned int	alpha;
-
-	alpha = (data->alpha << 24);
-	for (int y = 0; y < data->mlx.w_h; y++)
+	
+	if (data->set_alpha_mode == false)
 	{
-		for (int x = 0; x < data->mlx.w_w; x++)
+		if (data->img.img != 0)
+			mlx_destroy_image(data->mlx.mlx, data->img.img);
+		data->img.img = mlx_new_image(data->mlx.mlx, data->mlx.w_w, data->mlx.w_h);
+		data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel, &data->img.line_lenght, &data->img.endian);
+	}
+	else
+	{
+		alpha = (data->alpha << 24);
+		for (int y = 0; y < data->mlx.w_h; y++)
 		{
-			my_mlx_pixel_put(data, x, y, alpha);
+			for (int x = 0; x < data->mlx.w_w; x++)
+			{
+				my_mlx_pixel_put(data, x, y, alpha);
+			}
 		}
 	}
 }

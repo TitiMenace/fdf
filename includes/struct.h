@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:06:31 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/23 20:43:35 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:56:44 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct	s_data
 	bool	isometric;
 	float	cinematic;
 	unsigned char	alpha;
+	bool	set_alpha_mode;
 	bool	set_cinematic;
 	int	(*get_color)(t_data *data, float z_origin, float z_rotated);
 }				t_data;

@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 01:38:40 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/23 22:49:43 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:57:05 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,20 @@ void	init_mlx(t_data *data)
 	data->cinematic = 1;
 	data->alpha = 0;
 	data->set_cinematic = false;
+	data->set_alpha_mode = false;
 }
 
 void	init_offset(t_data *data)
 {
-	int	biggest_size;
+
+	data->offset = OFFSET + 1;
+	/*(	int	biggest_size;
 
 	biggest_size = get_biggest_len(data);
 	if (biggest_size < data->len_y)
 		biggest_size = data->len_y;
 
-	data->offset = data->mlx.w_h / biggest_size;
+	data->offset = data->mlx.w_h / biggest_size;*/
 }
 
 void	init_line(t_point *line, t_data *data)
