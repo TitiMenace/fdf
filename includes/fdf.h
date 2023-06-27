@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   fdfi.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2023/06/21 05:28:32 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/27 03:46:32 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDFI_H
+# define FDFI_H
 
 # include "struct.h"
 # include "includes.h"
@@ -60,12 +60,19 @@ char	*ft_strjoin(char *remain, char *buffer);
 /* -------------------------------------------------------------------------- */
 /*                          FILE = src_bonus/main.c                           */
 /* -------------------------------------------------------------------------- */
-int	get_biggest_len(t_data *data);
 void	init_mlx(t_data *data);
+void	rendering(t_data *data);
+void	initializations(t_data *data);
+int	main(int ac, char **av);
+
+/* -------------------------------------------------------------------------- */
+/*                     FILE = src_bonus/initialization.c                      */
+/* -------------------------------------------------------------------------- */
+void	init_cinematic(t_data *data);
+void	init_color(t_data *data);
+void	init_projections(t_data *data);
 void	init_offset(t_data *data);
 void	init_line(t_point *line, t_data *data);
-void	rendering(t_data *data);
-int	main(int ac, char **av);
 
 /* -------------------------------------------------------------------------- */
 /*                        FILE = src_bonus/check_map.c                        */
@@ -85,12 +92,10 @@ int	ft_strcmp(char *s1, char *s2);
 /*                        FILE = src_bonus/draw_map.c                         */
 /* -------------------------------------------------------------------------- */
 void	projections(t_point *line, t_data *data, t_rot *r1, t_rot *r2);
-void	init_rot(t_rot *rotate, float x, float y, float z, t_point *line);
+void	init_rot(t_rot *rotate, float x, float y, float z, int color);
 void	init_origin(t_rot *r1, t_rot *r2);
 void	draw(t_rot *r1, t_rot *r2, t_data *data,  t_point *line, int color);
 bool	draw_adjacent(int i, t_map ***map, t_data *data, t_point *line);
-void	final_draw(t_map ***map, t_data *data, t_point *line);
-void	right_line(t_map ***map, t_data *data, t_point *line);
 bool	draw_map(t_map ***map, t_data *data, t_point *line);
 
 /* -------------------------------------------------------------------------- */

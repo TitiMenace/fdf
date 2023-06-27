@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 00:27:38 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/24 18:58:15 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/26 21:52:27 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 
 int	destroy(t_data *data)
 {
+	mlx_destroy_image(data->mlx.mlx, data->img.img);
 	mlx_destroy_window(data->mlx.mlx, data->mlx.win);
 	mlx_destroy_display(data->mlx.mlx);
-	free_map(&(data->map), data->len_y - 1);
+	free_map(&(data->map), data->len_y);
 	free(data->mlx.mlx);
+	free(data->line_len);
 	exit(EXIT_SUCCESS);
 	return(1);
 
@@ -42,21 +44,37 @@ static int	hooks_handler(int zazou, t_data *data)
 		data->angle.angle_z = 0;
 		*/
 	//if (zazou == XK_p)
-	if (zazou == XK_f)
+	if (zazou == XK_i)
 	{
 		if (data->set_cinematic == true)
 			data->set_cinematic = false;
 		else
 			data->set_cinematic = true;
 	}	
-	if (zazou == XK_b && data->alpha + 10 <= 255)
+	if (zazou == XK_h && data->alpha + 10 <= 255)
 		data->alpha += 10;
-	if (zazou == XK_v && data->alpha - 10 >= 0)
+	if (zazou == XK_j && data->alpha - 10 >= 0)
 		data->alpha -= 10;
-	if (zazou == XK_k && data->cinematic >= 0)
-		data->cinematic -= 0.1;
-	if (zazou == XK_l && data->cinematic <= 1)
-		data->cinematic += 0.1;
+	if (data->set_cinematic == true)
+	{
+		if (zazou == XK_e && data->cinematic_x >= -1)
+				data->cinematic_x -= 0.1;
+		if (zazou == XK_r && data->cinematic_x <= 1)
+				data->cinematic_x += 0.1;
+		if (zazou == XK_d && data->cinematic_y >= -1)
+				data->cinematic_y -= 0.1;
+		if (zazou == XK_f && data->cinematic_y <= 1)
+				data->cinematic_y += 0.1;
+		if (zazou == XK_c && data->cinematic_z >= -1)
+				data->cinematic_z -= 0.1;
+		if (zazou == XK_v && data->cinematic_z <= 1)
+				data->cinematic_z += 0.1;
+		if (zazou == XK_k && data->cinematic >= 0)
+			data->cinematic -= 0.1;
+		if (zazou == XK_l && data->cinematic <= 1)
+			data->cinematic += 0.1;
+	}
+
 	if (zazou == XK_p)
 	{
 		if (data->isometric == true)

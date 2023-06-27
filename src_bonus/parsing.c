@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:40:23 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/21 05:23:32 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/26 23:48:45 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,15 +128,11 @@ bool	parsing_map(char *buffer, t_map ***map, t_data *data)
 					index++;
 			}
 			else
-			{
-				if ((*map)[y][x].z > 0)
-					(*map)[y][x].color.hex = 0xffc0cb;
-				else
-					(*map)[y][x].color.hex = 0xFF8000;
-			}
+				(*map)[y][x].color.hex = 0;
 			x++;
 		}
 		y++;
 	}
+	free(buffer);
 	return (true);
 }

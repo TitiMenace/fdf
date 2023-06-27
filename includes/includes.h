@@ -12,8 +12,8 @@
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 # define OFFSET 10
-# define RA_X 0
-# define RA_Y 0
+# define RA_X 45
+# define RA_Y 35.3644
 # define RA_Z 0
 
 # include "fdf.h"
