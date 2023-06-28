@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 03:23:16 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/26 21:47:25 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/28 02:36:23 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,24 @@ void	ft_memset(void *ptr, int value, size_t count)
 void	img_init(t_data	*data)
 {
 	unsigned int	alpha;
+	int				y;
+	int				x;
 	
 	if (data->set_alpha_mode == false)
-	{
-		if (data->img.img != 0)
-			mlx_destroy_image(data->mlx.mlx, data->img.img);
-		data->img.img = mlx_new_image(data->mlx.mlx, data->mlx.w_w, data->mlx.w_h);
-		data->img.addr = mlx_get_data_addr(data->img.img, &data->img.bits_per_pixel, &data->img.line_lenght, &data->img.endian);
-	}
+		no_alpha_rendering(data);	
 	else
 	{
 		alpha = (data->alpha << 24);
-		for (int y = 0; y < data->mlx.w_h; y++)
+		y = 0;
+		while (y < data->mlx.w_h)
 		{
-			for (int x = 0; x < data->mlx.w_w; x++)
+			x = 0;
+			while (x < data->mlx.w_w)
 			{
 				my_mlx_pixel_put(data, x, y, alpha);
+				x++;
 			}
+			y++;
 		}
 	}
 }
@@ -55,28 +56,30 @@ int color_from_alpha(unsigned int old_color,unsigned  int new_color, float alpha
 {
 	char	*old_col;
 	char	*new_col;
+	t_rgb	alpha_tmp;
 
 	old_col = (char *)&old_color;
 	new_col = (char *)&new_color;
-	unsigned int r = ((old_color << 8) >> 24) * alpha + ((new_color << 8) >> 24) * (1. - alpha);
-	unsigned int g = ((old_color << 16) >> 24) * alpha + ((new_color << 16) >> 24) * (1. - alpha);
-	unsigned int b = ((old_color << 24) >> 24) * alpha + ((new_color << 24) >> 24) * (1. - alpha);
-	return (r << 16 | g << 8 | b);
+	alpha_tmp.r = ((old_color << 8) >> 24) * alpha + ((new_color << 8) >> 24) * (1. - alpha);
+	alpha_tmp.g = ((old_color << 16) >> 24) * alpha + ((new_color << 16) >> 24) * (1. - alpha);
+	alpha_tmp.b = ((old_color << 24) >> 24) * alpha + ((new_color << 24) >> 24) * (1. - alpha);
+	return (alpha_tmp.r << 16 | alpha_tmp.g << 8 | alpha_tmp.b);
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	int *pixel_addr = ((int *)(data->img.addr) + ((y << 10) + (y << 9) + (y << 8) + (y << 7) + x));
-	u_int8_t	test = color >> 24;
-	float alpha = (float)test / (float)0xFF;
-	//printf("%d  %d  %f\n", color, color >> 24, alpha);
+	int 		*pixel_addr;
+	u_int8_t	test;
+	float		alpha;
+	int			old_color;
+	
+	pixel_addr = ((int *)(data->img.addr)\
+	+ ((y << 10) + (y << 9) + (y << 8) + (y << 7) + x));
+	test = color >> 24;
+	alpha = (float)test / (float)0xFF;
 	color = (color << 8) >> 8;
-	//t_v3uc	col1 = *((t_v3uc *)&color);
-	int old_color = *pixel_addr;
-	color = color_from_alpha((unsigned int)old_color, (unsigned int)color, alpha);
-	//t_v3uc ccolor = ((*((t_v3uc *)&old_color)) * alpha + col1 * (1. - alpha));
-	 //*((int *)(data->img.addr) + ((y << 10) + (y << 9) + (y << 8) + (y << 7) + x)) = color;
-	//*pixel_addr = *((t_v3uc *)&ccolor);
+	old_color = *pixel_addr;
+	color = color_from_alpha((unsigned int)old_color\
+	, (unsigned int)color, alpha);
 	*pixel_addr = color;
-	//dprintf(2, "%d %d,%d\n", *pixel_addr, x, y);
 }

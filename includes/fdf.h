@@ -6,12 +6,12 @@
 /*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2023/06/27 03:46:32 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/28 02:37:19 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDFI_H
-# define FDFI_H
+#ifndef FDF_H
+# define FDF_H
 
 # include "struct.h"
 # include "includes.h"
@@ -83,6 +83,13 @@ int	ft_atoi(char *buffer, int *index);
 bool	init_map(char *file_name, t_map	***map, t_data *data);
 
 /* -------------------------------------------------------------------------- */
+/*                      FILE = src_bonus/parsing_utils.c                      */
+/* -------------------------------------------------------------------------- */
+void	set_z_range(t_data *data, t_map ***map, int y, int x);
+void	get_map_color_hex(t_map ***map, char *buffer, int *index, int *hex_color);
+bool	map_allocation(t_data *data, char *buffer, t_map ***map);
+
+/* -------------------------------------------------------------------------- */
 /*                        FILE = src_bonus/fdf_utils.c                        */
 /* -------------------------------------------------------------------------- */
 int	ft_strlen(char *str);
@@ -123,6 +130,12 @@ float	x_projection(t_data *data, float x, float z);
 float	y_projection(t_data *data, float y, float z);
 
 /* -------------------------------------------------------------------------- */
+/*                      FILE = src_bonus/colors_hooks.c                       */
+/* -------------------------------------------------------------------------- */
+void	set_alpha_value_hooks(t_data *data, int zazou);
+void	set_colors_hooks(t_data *data, int zazou);
+
+/* -------------------------------------------------------------------------- */
 /*                         FILE = src_bonus/square.c                          */
 /* -------------------------------------------------------------------------- */
 int	put_square(void	*mlx, void *win, int middle_x, int middle_y, int color, int size);
@@ -140,6 +153,19 @@ bool	isprintable(char c);
 int	get_lines(char *str);
 void	free_map(t_map ***map, int i);
 bool	parsing_map(char *buffer, t_map ***map, t_data *data);
+
+/* -------------------------------------------------------------------------- */
+/*                        FILE = src_bonus/mlx_utils.c                        */
+/* -------------------------------------------------------------------------- */
+void	 no_alpha_rendering(t_data *data);
+
+/* -------------------------------------------------------------------------- */
+/*                     FILE = src_bonus/cinematic_hooks.c                     */
+/* -------------------------------------------------------------------------- */
+void	set_mods_hooks(t_data *data, int zazou);
+void	set_movements_hooks(t_data *data, int zazou);
+void	set_cinematics_hooks(t_data *data, int zazou);
+void	set_angles_hooks(t_data *data, int zazou);
 
 
 #endif

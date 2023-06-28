@@ -5,34 +5,24 @@
 
 unsigned int get_interpolated_color(t_data *data, unsigned int start_color, unsigned int end_color, double t)
 {
-	unsigned char	start_r;
-	unsigned char 	start_g;
-	unsigned char	start_b;
+	t_inter	colors;
 
-	unsigned char 	end_r;
-	unsigned char	end_g;
-	unsigned char	end_b;
-
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-	
 	if (data->z_min == data->z_max)
 		return (0x00FF0000);
 
-	start_r = (start_color >> 16) & 0xFF;
-	start_g = (start_color >> 8) & 0xFF;
-	start_b = start_color & 0xFF;
+	colors.start_r = (start_color >> 16) & 0xFF;
+	colors.start_g = (start_color >> 8) & 0xFF;
+	colors.start_b = start_color & 0xFF;
 
-	end_r = (end_color >> 16) & 0xFF;
-	end_g = (end_color >> 8) & 0xFF;
-	end_b = end_color & 0xFF;
+	colors.end_r = (end_color >> 16) & 0xFF;
+	colors.end_g = (end_color >> 8) & 0xFF;
+	colors.end_b = end_color & 0xFF;
 
-	r = (float)(start_r + (end_r - start_r) * t);
-	g = (float)(start_g + (end_g - start_g) * t);
-	b = (float)(start_b + (end_b - start_b) * t);
+	colors.r = (float)(colors.start_r + (colors.end_r - colors.start_r) * t);
+	colors.g = (float)(colors.start_g + (colors.end_g - colors.start_g) * t);
+	colors.b = (float)(colors.start_b + (colors.end_b - colors.start_b) * t);
 
-	return ((r << 16) | (g << 8) | b);
+	return ((colors.r << 16) | (colors.g << 8) | colors.b);
 }
 
 

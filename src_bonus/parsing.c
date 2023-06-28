@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:40:23 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/26 23:48:45 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/28 02:31:57 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,10 @@ int	get_line_len(char *str, int i)
 
 	i = 0;
 	count = 0;
-
 	while (str[i] == '\n' || str[i] == ' ')
 		i++;
 	while (str[i] != '\n')
 	{ 
-		while (str[i] == ' ')
-			i++;
 		if (str[i] == '-')
 			i++;
 		if (str[i] >= '0' && str[i] <= '9')
@@ -39,8 +36,8 @@ int	get_line_len(char *str, int i)
 		{
 			while (str[i] != ' ' && str[i] != '\n')
 				i++;
-			continue;
 		}
+		i++;
 	}
 	return (count);
 }
@@ -88,13 +85,8 @@ bool	parsing_map(char *buffer, t_map ***map, t_data *data)
 	int	x;
 	int	index;
 
-	data->len_y = get_lines(buffer);
-	data->line_len = malloc(sizeof(int) * data->len_y);
-	if (!data->line_len)
+	if (!map_allocation(data, buffer, map))
 		return (false);
-	*map = malloc(sizeof(t_map *) * data->len_y);
-	if (!*map)
-		return (free(data->line_len), false);
 	y = 0;
 	index = 0;
 	while (y < data->len_y)
@@ -107,32 +99,11 @@ bool	parsing_map(char *buffer, t_map ***map, t_data *data)
 		while (x < data->line_len[y])
 		{
 			(*map)[y][x].z = ft_atoi(buffer, &index);
-			if (y == 0 && x == 0)
-			{
-				data->z_max = (*map)[y][x].z;
-				data->z_min = (*map)[y][x].z;
-			}
-			else
-			{
-				if ((*map)[y][x].z >= data->z_max)
-					data->z_max = (*map)[y][x].z;
-				else if ((*map)[y][x].z <= data->z_min)
-					data->z_min = (*map)[y][x].z;
-			}
-			if (buffer[index] == ',')
-			{
-				while (buffer[index - 1] != 'x')
-					index++;
-				(*map)[y][x].color.hex = ft_atohex(&buffer[index]);
-				while (buffer[index] != ' ' && buffer[index] != '\n')
-					index++;
-			}
-			else
-				(*map)[y][x].color.hex = 0;
+			set_z_range(data, map, y, x);	
+			get_map_color_hex(map, buffer, &index, &(*map)[y][x].color.hex);
 			x++;
 		}
 		y++;
 	}
-	free(buffer);
 	return (true);
 }

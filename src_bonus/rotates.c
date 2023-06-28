@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:04:54 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/20 00:45:49 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/28 00:28:27 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	init_angle(t_data *data)
 
 void	init_special_rotations(t_rot *rotation, t_data *data)
 {
-	
 	if (data->angle.angle_y != 0)
 		rotate_y(rotation, data);
 	if (data->angle.angle_x != 0)

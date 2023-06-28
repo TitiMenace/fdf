@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:57:46 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/26 21:13:52 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/28 01:41:08 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ bool	init_map(char *file_name, t_map	***map, t_data *data)
 		return (false);
 	if (!parsing_map(buffer, map, data))
 		return (free(buffer), false);
+	free(buffer);
 	return (true);
 }
