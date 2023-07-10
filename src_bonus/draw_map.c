@@ -51,9 +51,6 @@ void	draw(t_rot *r1, t_rot *r2, t_data *data,  t_point *line, int color)
 
 bool	draw_adjacent(int i, t_map ***map, t_data *data, t_point *line)
 {
-	t_rot	origin;
-	t_rot	right;
-	t_rot	down;
 	int		j;
 	int	origin_color;
 	
@@ -61,49 +58,49 @@ bool	draw_adjacent(int i, t_map ***map, t_data *data, t_point *line)
 	while (j < data->line_len[i])
 	{
 		origin_color = (*map)[i][j + 1].color.hex;
-		origin.z_origin = (*map)[i][j].z;
+		data->draw_helper.origin.z_origin = (*map)[i][j].z;
 		if (j + 1 != data->line_len[i])
-			right.z_origin = (*map)[i][j + 1].z;
+			data->draw_helper.right.z_origin = (*map)[i][j + 1].z;
 		if (i + 1 != data->len_y)
-			down.z_origin = (*map)[i + 1][j].z;
+			data->draw_helper.down.z_origin = (*map)[i + 1][j].z;
 		if	(j == 0)
 		{
-			init_rot(&origin, (float)j - ((float)data->line_len[i] / 2), (float)i - (float)data->len_y / 2, (*map)[i][j].z, (*map)[i][j].color.hex);
-			init_rotations(&origin, data);
+			init_rot(&data->draw_helper.origin, (float)j - ((float)data->line_len[i] / 2), (float)i - (float)data->len_y / 2, (*map)[i][j].z, (*map)[i][j].color.hex);
+			init_rotations(&data->draw_helper.origin, data);
 		}
 		else
-			init_origin(&origin, &right);
+			init_origin(&data->draw_helper.origin, &data->draw_helper.right);
 		if (j + 1 == data->line_len[i] && i + 1 != data->len_y)
 		{
-			init_rot(&down, (float)j - ((float)data->line_len[i] / 2), ((float)i - (float)data->len_y / 2) + 1, (*map)[i + 1][j].z, (*map)[i + 1][j].color.hex);
+			init_rot(&data->draw_helper.down, (float)j - ((float)data->line_len[i] / 2), ((float)i - (float)data->len_y / 2) + 1, (*map)[i + 1][j].z, (*map)[i + 1][j].color.hex);
 			if (data->special_rendering == true)
-				init_special_rotations(&down, data);
+				init_special_rotations(&data->draw_helper.down, data);
 			else
-				init_rotations(&down, data);
-			draw(&origin, &down, data, line, origin_color);
+				init_rotations(&data->draw_helper.down, data);
+			draw(&data->draw_helper.origin, &data->draw_helper.down, data, line, origin_color);
 		}
 		else if (i + 1 == data->len_y)
 		{
 			if (j + 1 == data->line_len[i])
 				break;
-			init_rot(&right, ((float)j - (float)data->line_len[i] / 2) + 1, (float)i - (float)data->len_y / 2, (*map)[i][j + 1].z, (*map)[i][j + 1].color.hex);
+			init_rot(&data->draw_helper.right, ((float)j - (float)data->line_len[i] / 2) + 1, (float)i - (float)data->len_y / 2, (*map)[i][j + 1].z, (*map)[i][j + 1].color.hex);
 			if (data->special_rendering == true)
-				init_special_rotations(&right, data);
+				init_special_rotations(&data->draw_helper.right, data);
 			else
-				init_rotations(&right, data);
-			draw(&origin, &right, data, line, origin_color);
+				init_rotations(&data->draw_helper.right, data);
+			draw(&data->draw_helper.origin, &data->draw_helper.right, data, line, origin_color);
 		}
 		else
 		{
-			init_rot(&right, ((float)j - (float)data->line_len[i] / 2) + 1, (float)i - (float)data->len_y / 2, (*map)[i][j + 1].z, (*map)[i][j + 1].color.hex);
-			init_rot(&down, (float)j - ((float)data->line_len[i] / 2), ((float)i - (float)data->len_y / 2) + 1, (*map)[i + 1][j].z, (*map)[i][j + 1].color.hex);
-			init_rotations(&right, data);
+			init_rot(&data->draw_helper.right, ((float)j - (float)data->line_len[i] / 2) + 1, (float)i - (float)data->len_y / 2, (*map)[i][j + 1].z, (*map)[i][j + 1].color.hex);
+			init_rot(&data->draw_helper.down, (float)j - ((float)data->line_len[i] / 2), ((float)i - (float)data->len_y / 2) + 1, (*map)[i + 1][j].z, (*map)[i][j + 1].color.hex);
+			init_rotations(&data->draw_helper.right, data);
 			if (data->special_rendering == true)
-				init_special_rotations(&down, data);
+				init_special_rotations(&data->draw_helper.down, data);
 			else
-				init_rotations(&down, data);
-			draw(&origin, &right, data, line, origin_color);
-			draw(&origin, &down, data, line, origin_color);
+				init_rotations(&data->draw_helper.down, data);
+			draw(&data->draw_helper.origin, &data->draw_helper.right, data, line, origin_color);
+			draw(&data->draw_helper.origin, &data->draw_helper.down, data, line, origin_color);
 		}
 		j++;
 	}

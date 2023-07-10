@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:40:23 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/28 02:31:57 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/10 20:49:38 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ bool	parsing_map(char *buffer, t_map ***map, t_data *data)
 		{
 			(*map)[y][x].z = ft_atoi(buffer, &index);
 			set_z_range(data, map, y, x);	
-			get_map_color_hex(map, buffer, &index, &(*map)[y][x].color.hex);
+			get_map_color_hex(buffer, &index, &(*map)[y][x].color.hex);
 			x++;
 		}
 		y++;

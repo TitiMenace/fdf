@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:55:52 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/28 01:39:25 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/10 20:49:56 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	set_z_range(t_data *data, t_map ***map, int y, int x)
 	}
 }
 
-void	get_map_color_hex(t_map ***map, char *buffer, int *index, int *hex_color)
+void	get_map_color_hex(char *buffer, int *index, int *hex_color)
 {
 	if (buffer[*index] == ',')
 	{

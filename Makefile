@@ -6,7 +6,7 @@
 #    By: tschecro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/19 05:15:52 by tschecro          #+#    #+#              #
-#    Updated: 2023/06/27 03:47:29 by tschecro         ###   ########.fr        #
+#    Updated: 2023/07/10 20:51:21 by tschecro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRC_FILES		=	main.c fdf_utils.c get_next_line.c get_next_line_utils.c \
 SRC_FILES_BONUS	=	main.c fdf_utils.c get_next_line.c get_next_line_utils.c \
 					check_map.c parsing.c draw_map.c draw_line.c \
 					get_color.c mlx.c hooks.c isometric.c rotates.c color.c\
-					initialization.c
+					initialization.c cinematic_hooks.c parsing_utils.c\
+					mlx_utils.c colors_hooks.c
 
 SRC_DIR_BONUS	= src_bonus
 

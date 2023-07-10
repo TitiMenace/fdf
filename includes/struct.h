@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:06:31 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/28 01:20:19 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/06/28 07:31:18 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ typedef struct s_rot
 	float	z_origin;
 	int		col;
 }				t_rot;
+
+typedef struct s_draw_helper
+{
+	t_rot	origin;
+	t_rot	right;
+	t_rot 	down;
+}				t_draw_helper;
+
 
 
 typedef	struct	s_line
@@ -149,6 +157,7 @@ typedef struct	s_data
 	float	cinematic_x;
 	float	cinematic_y;
 	float	cinematic_z;
+	t_draw_helper	draw_helper;
 	int	(*get_color)(t_data *data, float z_origin, float z_rotated);
 }				t_data;
 

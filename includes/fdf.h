@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdfi.h                                             :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2023/06/28 02:37:19 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/10 20:49:55 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ bool	init_map(char *file_name, t_map	***map, t_data *data);
 /*                      FILE = src_bonus/parsing_utils.c                      */
 /* -------------------------------------------------------------------------- */
 void	set_z_range(t_data *data, t_map ***map, int y, int x);
-void	get_map_color_hex(t_map ***map, char *buffer, int *index, int *hex_color);
+void	get_map_color_hex(char *buffer, int *index, int *hex_color);
 bool	map_allocation(t_data *data, char *buffer, t_map ***map);
 
 /* -------------------------------------------------------------------------- */
