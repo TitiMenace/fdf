@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 02:05:36 by tschecro          #+#    #+#             */
-/*   Updated: 2023/03/28 15:18:20 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/11 02:23:38 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*clean_remain(char *remain)
 	if (remain[i])
 		i++;
 	out = malloc(sizeof(char) * (ft_strlen(remain + i) + 1));
+	//out = NULL;
 	if (!out)
 		return (free(remain), NULL);
 	j = 0;
@@ -73,5 +74,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = ft_fill_line(buffer, fd, &remain);
 	remain = clean_remain(remain);
+	if (!remain)
+		return(free(buffer), free(line), NULL);
 	return (free(buffer), line);
 }

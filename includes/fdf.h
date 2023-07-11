@@ -6,7 +6,7 @@
 /*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2023/07/10 20:49:55 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/11 00:22:52 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ int	ft_strcmp(char *s1, char *s2);
 void	projections(t_point *line, t_data *data, t_rot *r1, t_rot *r2);
 void	init_rot(t_rot *rotate, float x, float y, float z, int color);
 void	init_origin(t_rot *r1, t_rot *r2);
-void	draw(t_rot *r1, t_rot *r2, t_data *data,  t_point *line, int color);
-bool	draw_adjacent(int i, t_map ***map, t_data *data, t_point *line);
-bool	draw_map(t_map ***map, t_data *data, t_point *line);
+void	draw(t_rot *r1, t_rot *r2, t_data *data,  t_point *line);
+bool	draw_adjacent(int i, t_map ***map, t_data *data);
+bool	draw_map(t_map ***map, t_data *data);
 
 /* -------------------------------------------------------------------------- */
 /*                      FILE = src_bonus/get_next_line.c                      */
@@ -143,7 +143,7 @@ int	put_square(void	*mlx, void *win, int middle_x, int middle_y, int color, int 
 /* -------------------------------------------------------------------------- */
 /*                        FILE = src_bonus/draw_line.c                        */
 /* -------------------------------------------------------------------------- */
-void	draw_line(t_data *data, t_point *seg, int couleur);
+void	draw_line(t_data *data, t_point *seg);
 
 /* -------------------------------------------------------------------------- */
 /*                         FILE = src_bonus/parsing.c                         */
@@ -158,6 +158,14 @@ bool	parsing_map(char *buffer, t_map ***map, t_data *data);
 /*                        FILE = src_bonus/mlx_utils.c                        */
 /* -------------------------------------------------------------------------- */
 void	 no_alpha_rendering(t_data *data);
+
+/* -------------------------------------------------------------------------- */
+/*                       FILE = src_bonus/draw_helper.c                       */
+/* -------------------------------------------------------------------------- */
+void	right_line_drawing(t_data *data, t_map ***map, int i, int j);
+void	down_line_drawing(t_data *data, t_map ***map, int i, int j);
+void	regular_drawing(t_data *data, t_map ***map, int i, int j);
+void	drawing(t_data *data, t_map ***map, int i, int j);
 
 /* -------------------------------------------------------------------------- */
 /*                     FILE = src_bonus/cinematic_hooks.c                     */

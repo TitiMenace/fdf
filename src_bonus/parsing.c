@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:40:23 by tschecro          #+#    #+#             */
-/*   Updated: 2023/07/10 20:49:38 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/11 01:53:09 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@ int	get_line_len(char *str, int i)
 {
 	int	count;
 
-	i = 0;
 	count = 0;
 	while (str[i] == '\n' || str[i] == ' ')
 		i++;
 	while (str[i] != '\n')
 	{ 
+		while (str[i] == ' ')
+			i++;
 		if (str[i] == '-')
 			i++;
 		if (str[i] >= '0' && str[i] <= '9')
@@ -36,8 +37,8 @@ int	get_line_len(char *str, int i)
 		{
 			while (str[i] != ' ' && str[i] != '\n')
 				i++;
+			continue;
 		}
-		i++;
 	}
 	return (count);
 }
@@ -83,8 +84,9 @@ bool	parsing_map(char *buffer, t_map ***map, t_data *data)
 {
 	int	y;
 	int	x;
-	int	index;
+	int	index = 0;
 
+	
 	if (!map_allocation(data, buffer, map))
 		return (false);
 	y = 0;

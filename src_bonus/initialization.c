@@ -6,11 +6,13 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 03:18:04 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/27 03:22:24 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/11 01:36:52 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "struct.h"
+#include "includes.h"
 
 
 void	init_cinematic(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 04:50:52 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/13 00:51:11 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/11 01:29:19 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ int	strhexlen(char *buffer)
 
 bool	ishexdigit(char c)
 {
-	return ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') 
-			|| (c >= 'A' && c <= 'F'));
+	return ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f')
+		|| (c >= 'A' && c <= 'F'));
 }
 
 int	ft_atohex(char *buffer)
 {
 	int	hex;
-	int len;
+	int	len;
 	int	i;
 
 	len = strhexlen(buffer);

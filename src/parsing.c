@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:40:23 by tschecro          #+#    #+#             */
-/*   Updated: 2023/05/14 21:07:28 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/10 21:09:28 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,52 +82,3 @@ void	free_map(t_map ***map, int i)
 	free(*map);
 }
 
-bool	parsing_map(char *buffer, t_map ***map, t_data *data)
-{
-	int	y;
-	int	x;
-	int	index;
-
-	data->len_y = get_lines(buffer);
-	data->line_len = malloc(sizeof(int) * data->len_y);
-	if (!data->line_len)
-		return (false);
-	*map = malloc(sizeof(t_map *) * data->len_y);
-	if (!*map)
-		return (free(data->line_len), false);
-	y = 0;
-	index = 0;
-	while (y < data->len_y)
-	{
-		(*map)[y] = malloc(sizeof(t_map) * get_line_len(buffer, index));
-		if (!(*map)[y])
-			return (free_map(map, y), false);
-		data->line_len[y] = get_line_len(buffer, index);
-		x = 0;
-		while (x < data->line_len[y])
-		{
-			(*map)[y][x].z = ft_atoi(buffer, &index);
-			if (buffer[index] == ',')
-			{
-				while (buffer[index - 1] != 'x')
-					index++;
-				(*map)[y][x].color.hex = ft_atohex(&buffer[index]);
-				while (buffer[index] != ' ' && buffer[index] != '\n')
-					index++;
-			}
-			else
-			{
-				if ((*map)[y][x].z > 0)
-				{
-				//	(*map)[y][x].color.hex = 0xFAAC58;
-					(*map)[y][x].color.hex = 0xffc0cb;
-				}
-				else
-					(*map)[y][x].color.hex = 0xFF8000;
-			}
-			x++;
-		}
-		y++;
-	}
-	return (true);
-}

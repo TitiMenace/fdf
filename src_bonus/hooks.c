@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 00:27:38 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/27 23:02:26 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/11 01:22:59 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	destroy(t_data *data)
 	free(data->mlx.mlx);
 	free(data->line_len);
 	exit(EXIT_SUCCESS);
-	return(1);
-
+	return (1);
 }
 
 static int	loop_hook_handler(t_data *data)
@@ -36,15 +35,14 @@ static int	loop_hook_handler(t_data *data)
 
 static int	hooks_handler(int zazou, t_data *data)
 {
-		
 	if (zazou == XK_Escape)
 		destroy(data);
 	set_mods_hooks(data, zazou);
 	if (data->set_cinematic == true)
-		set_cinematics_hooks(data, zazou);	
+		set_cinematics_hooks(data, zazou);
 	set_movements_hooks(data, zazou);
 	set_angles_hooks(data, zazou);
-	set_colors_hooks(data, zazou);	
+	set_colors_hooks(data, zazou);
 	set_alpha_value_hooks(data, zazou);
 	rendering(data);
 	return (1);
@@ -56,12 +54,9 @@ int	cross_button(t_data *data)
 	return (1);
 }
 
-
 void	init_hooks(t_data *data)
 {
 	mlx_hook(data->mlx.win, 17, (1L << 17), cross_button, data);
 	mlx_hook(data->mlx.win, 2, KeyPressMask, hooks_handler, data);
-	//if (data->set_cinematic == true)
 	mlx_loop_hook(data->mlx.mlx, loop_hook_handler, data);
 }
-

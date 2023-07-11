@@ -1,11 +1,12 @@
-/* ************************************************************************** */ /*                                                                            */
+/* ************************************************************************** */
+/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/16 14:29:30 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/16 15:06:18 by tschecro         ###   ########.fr       */
+/*   Created: 2023/07/11 00:14:31 by tschecro          #+#    #+#             */
+/*   Updated: 2023/07/11 00:21:19 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +43,14 @@ void	init_origin(t_rot *r1, t_rot *r2)
 	r1->z = r2->z;	
 }
 
-void	draw(t_rot *r1, t_rot *r2, t_data *data,  t_point *line, int color)
+void	draw(t_rot *r1, t_rot *r2, t_data *data,  t_point *line)
 {
 	projections(line, data, r1, r2);
-	draw_line(data, line, color);
+	draw_line(data, line);
 }
 
 
-bool	draw_adjacent(int i, t_map ***map, t_data *data, t_point *line)
+bool	draw_adjacent(int i, t_map ***map, t_data *data)
 {
 	int		j;
 	int	origin_color;
@@ -70,51 +71,20 @@ bool	draw_adjacent(int i, t_map ***map, t_data *data, t_point *line)
 		}
 		else
 			init_origin(&data->draw_helper.origin, &data->draw_helper.right);
-		if (j + 1 == data->line_len[i] && i + 1 != data->len_y)
-		{
-			init_rot(&data->draw_helper.down, (float)j - ((float)data->line_len[i] / 2), ((float)i - (float)data->len_y / 2) + 1, (*map)[i + 1][j].z, (*map)[i + 1][j].color.hex);
-			if (data->special_rendering == true)
-				init_special_rotations(&data->draw_helper.down, data);
-			else
-				init_rotations(&data->draw_helper.down, data);
-			draw(&data->draw_helper.origin, &data->draw_helper.down, data, line, origin_color);
-		}
-		else if (i + 1 == data->len_y)
-		{
-			if (j + 1 == data->line_len[i])
-				break;
-			init_rot(&data->draw_helper.right, ((float)j - (float)data->line_len[i] / 2) + 1, (float)i - (float)data->len_y / 2, (*map)[i][j + 1].z, (*map)[i][j + 1].color.hex);
-			if (data->special_rendering == true)
-				init_special_rotations(&data->draw_helper.right, data);
-			else
-				init_rotations(&data->draw_helper.right, data);
-			draw(&data->draw_helper.origin, &data->draw_helper.right, data, line, origin_color);
-		}
-		else
-		{
-			init_rot(&data->draw_helper.right, ((float)j - (float)data->line_len[i] / 2) + 1, (float)i - (float)data->len_y / 2, (*map)[i][j + 1].z, (*map)[i][j + 1].color.hex);
-			init_rot(&data->draw_helper.down, (float)j - ((float)data->line_len[i] / 2), ((float)i - (float)data->len_y / 2) + 1, (*map)[i + 1][j].z, (*map)[i][j + 1].color.hex);
-			init_rotations(&data->draw_helper.right, data);
-			if (data->special_rendering == true)
-				init_special_rotations(&data->draw_helper.down, data);
-			else
-				init_rotations(&data->draw_helper.down, data);
-			draw(&data->draw_helper.origin, &data->draw_helper.right, data, line, origin_color);
-			draw(&data->draw_helper.origin, &data->draw_helper.down, data, line, origin_color);
-		}
+		drawing(data, map, i, j);
 		j++;
 	}
-	return (true);
+	return(true);
 }
 
-bool	draw_map(t_map ***map, t_data *data, t_point *line)
+bool	draw_map(t_map ***map, t_data *data)
 {
 	int	i;
 
 	i = 0;
 	while (i < data->len_y)
 	{
-		draw_adjacent(i, map, data, line);
+		draw_adjacent(i, map, data);
 		i++;
 	}
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:55:11 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/27 00:23:35 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/11 00:28:15 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	def_error(int a, int b)
 	else
 		return (-b / 2);
 }
-void	draw_line(t_data *data, t_point *seg, int couleur)
+void	draw_line(t_data *data, t_point *seg)
 {
 	t_line	utils;
 	int	err2;
@@ -58,15 +58,14 @@ void	draw_line(t_data *data, t_point *seg, int couleur)
 	int		color1;
 	int		color2;
 
-	(void)couleur;
-	if (seg->col_a != 0)
+//	if (seg->col_a != 0)
 		color1 = data->start_color;
-	else
-		color1 = seg->col_a;
-	if (seg->col_b != 0)
+//	else
+//		color1 = seg->col_a;
+//	if (seg->col_b != 0)
 		color2 = data->end_color;
-	else
-		color2 = seg->col_b;
+//	else
+//		color2 = seg->col_b;
 	init_s_line(&utils);
 	utils.dx = ft_abs(seg->b_x - seg->a_x);
 	utils.dy = ft_abs(seg->b_y - seg->a_y);
