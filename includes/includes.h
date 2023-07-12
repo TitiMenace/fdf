@@ -29,5 +29,6 @@
 # include <X11/keysymdef.h>
 # include <stdlib.h>
 # include <X11/X.h>
+# include <errno.h>
 
 #endif

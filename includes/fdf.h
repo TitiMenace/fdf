@@ -6,7 +6,7 @@
 /*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2023/07/11 00:22:52 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/12 03:25:16 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	ft_strcmp(char *s1, char *s2);
 /*                        FILE = src_bonus/draw_map.c                         */
 /* -------------------------------------------------------------------------- */
 void	projections(t_point *line, t_data *data, t_rot *r1, t_rot *r2);
-void	init_rot(t_rot *rotate, float x, float y, float z, int color);
 void	init_origin(t_rot *r1, t_rot *r2);
 void	draw(t_rot *r1, t_rot *r2, t_data *data,  t_point *line);
 bool	draw_adjacent(int i, t_map ***map, t_data *data);
@@ -115,9 +114,6 @@ char	*get_next_line(int fd);
 /* -------------------------------------------------------------------------- */
 /*                         FILE = src_bonus/rotates.c                         */
 /* -------------------------------------------------------------------------- */
-void	init_angle(t_data *data);
-void	init_special_rotations(t_rot *rotation, t_data *data);
-void	init_rotations(t_rot *rotation, t_data *data);
 void	rotate_z(t_rot *rot, t_data *data);
 void	rotate_y(t_rot *rot, t_data *data);
 void rotate_x(t_rot *rot, t_data *data);
@@ -163,9 +159,9 @@ void	 no_alpha_rendering(t_data *data);
 /*                       FILE = src_bonus/draw_helper.c                       */
 /* -------------------------------------------------------------------------- */
 void	right_line_drawing(t_data *data, t_map ***map, int i, int j);
-void	down_line_drawing(t_data *data, t_map ***map, int i, int j);
+bool	down_line_drawing(t_data *data, t_map ***map, int i, int j);
 void	regular_drawing(t_data *data, t_map ***map, int i, int j);
-void	drawing(t_data *data, t_map ***map, int i, int j);
+bool	drawing(t_data *data, t_map ***map, int i, int j);
 
 /* -------------------------------------------------------------------------- */
 /*                     FILE = src_bonus/cinematic_hooks.c                     */
@@ -175,5 +171,27 @@ void	set_movements_hooks(t_data *data, int zazou);
 void	set_cinematics_hooks(t_data *data, int zazou);
 void	set_angles_hooks(t_data *data, int zazou);
 
+/* -------------------------------------------------------------------------- */
+/*                     FILE = src_bonus/draw_map_utils.c                      */
+/* -------------------------------------------------------------------------- */
+void	set_init_rot_helper(t_data *data, float x, float y, float z);
+void	set_origin_point(t_data *data, t_map ***map, int i, int j);
+void	init_rot(t_rot *rotate, t_init_r ro, int color);
+
+/* -------------------------------------------------------------------------- */
+/*                     FILE = src_bonus/rotates_utils.c                       */
+/* -------------------------------------------------------------------------- */
+void	init_angle(t_data *data);
+void	init_rotations(t_rot *rotation, t_data *data);
+void	init_special_rotations(t_rot *rotation, t_data *data);
+
+/* -------------------------------------------------------------------------- */
+/*                     FILE = src_bonus/draw_line_utils.c                     */
+/* -------------------------------------------------------------------------- */
+
+void	draw_line_pixel_put(t_data *data, t_point *seg, t_bresen *help);
+void	bresenham(t_data *data, t_point *seg, t_bresen *help, t_line *utils);
+void	init_bresen_color(t_bresen *help, t_point *seg, t_data *data);
+void	last_pixel(t_data *data, t_point *seg, t_bresen *help);
 
 #endif

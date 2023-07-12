@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:57:46 by tschecro          #+#    #+#             */
-/*   Updated: 2023/07/10 21:09:29 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/11 21:11:45 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	check_format(char *file_name)
 	int	i;
 
 	i = ft_strlen(file_name);
-	while(file_name[i] != '.')
+	while (file_name[i] != '.')
 		i--;
 	if (ft_strcmp(&file_name[i], ".fdf") != 0)
 		return (false);
@@ -31,13 +31,11 @@ char	*get_map(char *arg)
 	int		i;
 	char	*new_line;
 	char	*buffer;
-	
-	
+
+	errno = 0;
 	i = open(arg, O_RDONLY);
 	if (i == -1)
-	{
 		return (NULL);
-	}
 	new_line = "";
 	buffer = NULL;
 	new_line = get_next_line(i);
@@ -46,6 +44,8 @@ char	*get_map(char *arg)
 		buffer = ft_strjoin(buffer, new_line);
 		free(new_line);
 		new_line = get_next_line(i);
+		if (errno != 0)
+			return (free(buffer), free(new_line), NULL);
 	}
 	close(i);
 	return (free(new_line), buffer);
@@ -54,7 +54,7 @@ char	*get_map(char *arg)
 int	ft_atoi(char *buffer, int *index)
 {
 	int	sign;
-	int result;
+	int	result;
 
 	while (buffer[*index] == ' ' || buffer[*index] == '\n')
 		(*index)++;
@@ -76,7 +76,7 @@ int	ft_atoi(char *buffer, int *index)
 bool	init_map(char *file_name, t_map	***map, t_data *data)
 {
 	char	*buffer;
-	
+
 	buffer = get_map(file_name);
 	if (!buffer)
 		return (false);

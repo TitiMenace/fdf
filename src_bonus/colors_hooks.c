@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 22:55:50 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/27 22:58:35 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/12 03:20:08 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	set_colors_hooks(t_data *data, int zazou)
 {
 	if (zazou == XK_g)
 	{
-		if(data->end_color == 0x00FF00FF)
+		if (data->end_color == 0)
 		{
 			data->start_color = 0x000000FF;
 			data->end_color = 0x0000FFFF;
@@ -36,17 +36,15 @@ void	set_colors_hooks(t_data *data, int zazou)
 			data->start_color = 0x00FF0000;
 			data->end_color = 0x00FFFF00;
 		}
-		else if (data->start_color == 0x00FF0000)
+		else if (data->end_color == 0x00FFFF00)
 		{
 			data->start_color = 0x007F00FF;
 			data->end_color = 0x00FF007F;
 		}
 		else
 		{
-			data->start_color = 0x00FF00FF;
-			data->end_color = 0x00FF00FF;
+			data->start_color = 0x00FFFFFF;
+			data->end_color = 0;
 		}
 	}
 }
-
-

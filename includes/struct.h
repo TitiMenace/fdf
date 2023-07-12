@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:06:31 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/28 07:31:18 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/12 06:02:16 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,25 @@ typedef struct	s_rgb
 	unsigned int	b;
 }				t_rgb;
 
+typedef struct	s_init_r
+{
+	float	x;
+	float	y;
+	float	z;
+}				t_init_r;
+
 typedef struct	s_data
 				t_data;
+
+typedef struct	s_bresen
+{
+	double	scale;
+	double	t;
+	double	dt;
+	int	color1;
+	int	color2;
+}				t_bresen;
+
 typedef struct	s_data
 {
 	t_angle angle;
@@ -140,6 +157,7 @@ typedef struct	s_data
 	t_mlx	mlx;
 	t_point	line;
 	t_img	img;
+	t_init_r	rot_hlp;
 	int		*line_len;
 	int		len_y;
 	float	offset;
@@ -150,6 +168,7 @@ typedef struct	s_data
 	int 	fov;
 	bool	special_rendering;
 	bool	isometric;
+	bool	fast_mode;
 	float	cinematic;
 	unsigned char	alpha;
 	bool	set_alpha_mode;

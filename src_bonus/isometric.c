@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:47:14 by tschecro          #+#    #+#             */
-/*   Updated: 2023/06/27 23:02:55 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/12 06:01:18 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ float	get_focal_lenght(float x, float y, float z)
 
 float	x_projection(t_data *data, float x, float z)
 {
-	float new_x;
+	float	new_x;
 
-	z+= data->fov;
+	z += data->fov;
 	if (data->isometric == true)
 		new_x = x * data->offset;
 	else
@@ -33,12 +33,12 @@ float	x_projection(t_data *data, float x, float z)
 
 float	y_projection(t_data *data, float y, float z)
 {
-	float new_y;
-		
-	z+= data->fov;
+	float	new_y;
+
+	z += data->fov;
 	if (data->isometric == true)
 		new_y = y * data->offset;
 	else
-		new_y = y * (data->offset / z );
+		new_y = y * (data->offset / z);
 	return (new_y);
 }

@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 03:23:16 by tschecro          #+#    #+#             */
-/*   Updated: 2023/07/11 01:21:15 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/12 04:54:37 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	float		alpha;
 	int			old_color;
 
-	pixel_addr = ((int *)(data->img.addr)
-			+ ((y << 10) + (y << 9) + (y << 8) + (y << 7) + x));
+	if (data->mlx.w_h < 1920 || data->mlx.w_w < 1080)
+		pixel_addr = (int *)(data->img.addr) + data->mlx.w_w * y + x;
+	else
+		pixel_addr = ((int *)(data->img.addr)
+				+ ((y << 10) + (y << 9) + (y << 8) + (y << 7) + x));
 	test = color >> 24;
 	alpha = (float)test / (float)0xFF;
 	color = (color << 8) >> 8;

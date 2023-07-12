@@ -6,14 +6,13 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 03:18:04 by tschecro          #+#    #+#             */
-/*   Updated: 2023/07/11 01:36:52 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/12 06:04:00 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "struct.h"
 #include "includes.h"
-
 
 void	init_cinematic(t_data *data)
 {
@@ -22,6 +21,7 @@ void	init_cinematic(t_data *data)
 	data->cinematic_y = 0;
 	data->cinematic_z = 0;
 	data->set_cinematic = false;
+	data->fast_mode = false;
 }
 
 void	init_color(t_data *data)
