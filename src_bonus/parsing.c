@@ -39,6 +39,9 @@ int	get_line_len(char *str, int i)
 				i++;
 			continue ;
 		}
+		if (str[i] != ' ' && str[i] != '\n'
+				&& (str[i] < 0  || str[i] > 9) && str[i] != '-')
+			return (-1);
 	}
 	return (count);
 }
@@ -85,6 +88,7 @@ bool	parsing_map(char *buffer, t_map ***map, t_data *data)
 	int	y;
 	int	x;
 	int	index;
+	int	len;
 
 	if (!map_allocation(data, buffer, map))
 		return (false);
@@ -92,10 +96,13 @@ bool	parsing_map(char *buffer, t_map ***map, t_data *data)
 	index = 0;
 	while (y < data->len_y)
 	{
-		(*map)[y] = malloc(sizeof(t_map) * get_line_len(buffer, index));
+		len = get_line_len(buffer, index);
+		if (len < 0)
+			return (free_map(map, y), false);
+		(*map)[y] = malloc(sizeof(t_map) * len);
 		if (!(*map)[y])
 			return (free_map(map, y), false);
-		data->line_len[y] = get_line_len(buffer, index);
+		data->line_len[y] = len;
 		x = 0;
 		while (x < data->line_len[y])
 		{

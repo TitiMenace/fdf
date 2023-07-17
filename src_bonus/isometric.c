@@ -24,6 +24,8 @@ float	x_projection(t_data *data, float x, float z)
 	float	new_x;
 
 	z += data->fov;
+	if (z == 0)
+		z = 0.001;
 	if (data->isometric == true)
 		new_x = x * data->offset;
 	else
@@ -36,6 +38,8 @@ float	y_projection(t_data *data, float y, float z)
 	float	new_y;
 
 	z += data->fov;
+	if (z == 0)
+		z = 0.001;
 	if (data->isometric == true)
 		new_y = y * data->offset;
 	else

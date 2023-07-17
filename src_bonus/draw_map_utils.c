@@ -24,7 +24,7 @@ void	set_init_rot_helper(t_data *data, float x, float y, float z)
 void	set_origin_point(t_data *data, t_map ***map, int i, int j)
 {
 	set_init_rot_helper(data, (float)j
-		- ((float)data->line_len[i] / 2), (float)i
+		- ((float)data->line_len[0] / 2), (float)i
 		- (float)data->len_y / 2, (*map)[i][j].z);
 	init_rot(&data->draw_helper.origin, data->rot_hlp, \
 			(*map)[i][j].color.hex);

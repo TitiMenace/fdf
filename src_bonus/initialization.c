@@ -21,7 +21,7 @@ void	init_cinematic(t_data *data)
 	data->cinematic_y = 0;
 	data->cinematic_z = 0;
 	data->set_cinematic = false;
-	data->fast_mode = false;
+	data->fast_mode = true;
 }
 
 void	init_color(t_data *data)

@@ -23,10 +23,10 @@ typedef union	s_color
 	int	hex;
 	struct
 	{
-		char	b;
-		char	g;
-		char	r;
-		char	a;
+		unsigned int	a;
+		unsigned int	r;
+		unsigned int	g;
+		unsigned int	b;
 	};
 }				t_color;
 
@@ -63,6 +63,15 @@ typedef struct	s_point
 		int		col_b;
 
 }				t_point;
+
+
+typedef struct s_screen_seg
+{
+	t_point high_border;
+	t_point right_border;
+	t_point left_border;
+	t_point bottom_border;
+}				t_screen_seg;
 
 typedef struct s_rot
 {
@@ -148,6 +157,8 @@ typedef struct	s_bresen
 	double	dt;
 	int	color1;
 	int	color2;
+	double	a_scale;
+	double	b_scale;
 }				t_bresen;
 
 typedef struct	s_data
@@ -178,6 +189,8 @@ typedef struct	s_data
 	float	cinematic_z;
 	t_draw_helper	draw_helper;
 	int	(*get_color)(t_data *data, float z_origin, float z_rotated);
+	t_screen_seg	border;
+	int		return_value;
 }				t_data;
 
 #endif

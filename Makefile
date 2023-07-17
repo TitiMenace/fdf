@@ -19,7 +19,8 @@ SRC_FILES_BONUS	=	main.c fdf_utils.c get_next_line.c get_next_line_utils.c \
 					get_color.c mlx.c hooks.c isometric.c rotates.c color.c\
 					initialization.c cinematic_hooks.c parsing_utils.c\
 					mlx_utils.c colors_hooks.c draw_helper.c \
-					draw_map_utils.c rotates_utils.c draw_line_utils.c
+					draw_map_utils.c rotates_utils.c draw_line_utils.c \
+					truncate_line.c
 
 SRC_DIR_BONUS	= src_bonus
 
@@ -82,7 +83,7 @@ $(BONUS_NAME)	:	 	$(OBJ_BONUS) $(LIBS)
 $(OBJ_BONUS_DIR)/%.o 		:	$(SRC_DIR_BONUS)/%.c
 						@printf "\033[0;33m Generating fdf object... %-38.38s \r" $@
 						@mkdir -p $(OBJ_BONUS_DIR)
-						@$(CC) -Wall -Wextra -Werror -O3 -g3 -c -I $(HEADER) $< -o $@
+						@$(CC) -Wall -Wextra -Werror -o3 -g3 -c -I $(HEADER) $< -o $@
 
 $(LIBS)	:				
 			make -C $(LIBS_FOLDER)/$(MLX_DIR)

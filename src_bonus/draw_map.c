@@ -33,6 +33,7 @@ void	init_origin(t_rot *r1, t_rot *r2)
 	r1->x = r2->x;
 	r1->y = r2->y;
 	r1->z = r2->z;
+	r1->col = r2->col;
 }
 
 void	draw(t_rot *r1, t_rot *r2, t_data *data, t_point *line)
@@ -44,12 +45,12 @@ void	draw(t_rot *r1, t_rot *r2, t_data *data, t_point *line)
 bool	draw_adjacent(int i, t_map ***map, t_data *data)
 {
 	int		j;
-	int		origin_color;
+//	int		origin_color;
 
 	j = 0;
 	while (j < data->line_len[i])
 	{
-		origin_color = (*map)[i][j + 1].color.hex;
+//		origin_color = (*map)[i][j + 1].color.hex;
 		data->draw_helper.origin.z_origin = (*map)[i][j].z;
 		if (j + 1 != data->line_len[i])
 			data->draw_helper.right.z_origin = (*map)[i][j + 1].z;

@@ -16,13 +16,18 @@
 
 int	destroy(t_data *data)
 {
-	mlx_destroy_image(data->mlx.mlx, data->img.img);
-	mlx_destroy_window(data->mlx.mlx, data->mlx.win);
-	mlx_destroy_display(data->mlx.mlx);
+	if (data->img.img)
+		mlx_destroy_image(data->mlx.mlx, data->img.img);
+	if (data->mlx.win)
+		mlx_destroy_window(data->mlx.mlx, data->mlx.win);
+	if (data->mlx.mlx)
+	{
+		mlx_destroy_display(data->mlx.mlx);
+		free(data->mlx.mlx);
+	}
 	free_map(&(data->map), data->len_y);
-	free(data->mlx.mlx);
 	free(data->line_len);
-	exit(EXIT_SUCCESS);
+	exit(data->return_value);
 	return (1);
 }
 
@@ -36,7 +41,10 @@ static int	loop_hook_handler(t_data *data)
 static int	hooks_handler(int zazou, t_data *data)
 {
 	if (zazou == XK_Escape)
+	{
+		data->return_value = EXIT_SUCCESS;
 		destroy(data);
+	}
 	set_mods_hooks(data, zazou);
 	if (data->set_cinematic == true)
 		set_cinematics_hooks(data, zazou);

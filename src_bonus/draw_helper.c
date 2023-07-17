@@ -17,7 +17,7 @@
 void	right_line_drawing(t_data *data, t_map ***map, int i, int j)
 {
 	set_init_rot_helper(data, (float)j
-		- ((float)data->line_len[i] / 2), ((float)i
+		- ((float)data->line_len[0] / 2), ((float)i
 			- (float)data->len_y / 2) + 1, (*map)[i + 1][j].z);
 	init_rot(&data->draw_helper.down, data->rot_hlp, \
 		(*map)[i + 1][j].color.hex);
@@ -34,7 +34,7 @@ bool	down_line_drawing(t_data *data, t_map ***map, int i, int j)
 	if (j + 1 == data->line_len[i])
 		return (false);
 	set_init_rot_helper(data, (float)j
-		- ((float)data->line_len[i] / 2) + 1, (float)i
+		- ((float)data->line_len[0] / 2) + 1, (float)i
 		- (float)data->len_y / 2, (*map)[i][j + 1].z);
 	init_rot(&data->draw_helper.right, data->rot_hlp, \
 		(*map)[i][j + 1].color.hex);
@@ -50,15 +50,15 @@ bool	down_line_drawing(t_data *data, t_map ***map, int i, int j)
 void	regular_drawing(t_data *data, t_map ***map, int i, int j)
 {
 	set_init_rot_helper(data, (float)j
-		- ((float)data->line_len[i] / 2) + 1, (float)i
+		- ((float)data->line_len[0] / 2) + 1, (float)i
 		- (float)data->len_y / 2, (*map)[i][j + 1].z);
 	init_rot(&data->draw_helper.right, data->rot_hlp, \
 		(*map)[i][j + 1].color.hex);
 	set_init_rot_helper(data, (float)j
-		- ((float)data->line_len[i] / 2), ((float)i
+		- ((float)data->line_len[0] / 2), ((float)i
 			- (float)data->len_y / 2) + 1, (*map)[i + 1][j].z);
 	init_rot(&data->draw_helper.down, data->rot_hlp, \
-		(*map)[i][j + 1].color.hex);
+		(*map)[i + 1][j].color.hex);
 	init_rotations(&data->draw_helper.right, data);
 	if (data->special_rendering == true)
 		init_special_rotations(&data->draw_helper.down, data);
@@ -66,14 +66,20 @@ void	regular_drawing(t_data *data, t_map ***map, int i, int j)
 		init_rotations(&data->draw_helper.down, data);
 	draw(&data->draw_helper.origin, &data->draw_helper.right, \
 		data, &(data->line));
-	draw(&data->draw_helper.origin, &data->draw_helper.down, \
-		data, &(data->line));
+	if (j < data->line_len[i + 1])
+	{
+		draw(&data->draw_helper.origin, &data->draw_helper.down, \
+			data, &(data->line));
+	}
 }
 
 bool	drawing(t_data *data, t_map ***map, int i, int j)
 {
 	if (j + 1 == data->line_len[i] && i + 1 != data->len_y)
-		right_line_drawing(data, map, i, j);
+	{
+		if (j < data->line_len[i + 1])
+			right_line_drawing(data, map, i, j);
+	}
 	else if (i + 1 == data->len_y)
 	{
 		if (!down_line_drawing(data, map, i, j))

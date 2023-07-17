@@ -14,17 +14,45 @@
 #include "includes.h"
 #include "struct.h"
 
-void	init_mlx(t_data *data)
+bool	init_screen_border(t_data *data)
+{
+	data->border.high_border.a_x = 0;
+	data->border.high_border.a_y = 0;
+	data->border.high_border.b_x = data->mlx.w_w;
+	data->border.high_border.b_y = 0;
+	data->border.right_border.a_x = data->mlx.w_w;
+	data->border.right_border.a_y = 0;
+	data->border.right_border.b_x = data->mlx.w_w;
+	data->border.right_border.b_y = data->mlx.w_h;
+	data->border.left_border.a_x = 0;
+	data->border.left_border.a_y = 0;
+	data->border.left_border.b_x = 0;
+	data->border.left_border.b_y = data->mlx.w_h;
+	data->border.bottom_border.a_x = 0;
+	data->border.bottom_border.a_y = data->mlx.w_h;
+	data->border.bottom_border.b_x = data->mlx.w_w;	
+	data->border.bottom_border.b_y = data->mlx.w_h;	
+	return (true);
+}
+
+bool	init_mlx(t_data *data)
 {
 	data->mlx.mlx = mlx_init();
+	if (!data->mlx.mlx)
+		return (false);
 	data->mlx.w_w = WIN_WIDTH;
 	data->mlx.w_h = WIN_HEIGHT;
 	data->mlx.win = mlx_new_window(data->mlx.mlx, data->mlx.w_w, \
 			data->mlx.w_h, "fdf");
+	if (!data->mlx.win)
+		return (false);
 	data->img.img = mlx_new_image(data->mlx.mlx, data->mlx.w_w, data->mlx.w_h);
+	if (!data->img.img)
+		return (false);
 	data->img.addr = mlx_get_data_addr(data->img.img, \
 			&data->img.bits_per_pixel, &data->img.line_lenght, \
 			&data->img.endian);
+	return (true);
 }
 
 void	rendering(t_data *data)
@@ -43,33 +71,39 @@ void	rendering(t_data *data)
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->img.img, 0, 0);
 }
 
-void	initializations(t_data *data)
+bool	initializations(t_data *data)
 {
-	init_mlx(data);
+	data->return_value = EXIT_FAILURE;
+	if (!init_mlx(data))
+		return (false);
 	init_cinematic(data);
 	init_offset(data);
 	init_color(data);
 	init_projections(data);
 	init_line(&(data->line), data);
+	init_screen_border(data);
+	return (true);
 }
 
 int	main(int ac, char **av)
 {	
 	t_data	data;
 
+	ft_bzero(&data, sizeof(t_data));
 	if (ac != 2)
 		return (1);
 	if (!check_format(av[1]))
 		return (write(2, "Incorrect format !\n", 19));
 	if (!init_map(av[1], &(data.map), &data))
 		return (write(2, "Error\n", 6));
-	initializations(&data);
+	if (!initializations(&data))
+	{
+		destroy(&data);		
+		return (1);
+	}
 	init_angle(&data);
 	rendering(&data);
 	init_hooks(&data);
 	mlx_loop(data.mlx.mlx);
-	free_map(&data.map, data.len_y);
-	free(data.mlx.mlx);
-	free(data.line_len);
 	return (0);
 }

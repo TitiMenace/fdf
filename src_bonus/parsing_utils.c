@@ -53,5 +53,6 @@ bool	map_allocation(t_data *data, char *buffer, t_map ***map)
 	*map = malloc(sizeof(t_map *) * data->len_y);
 	if (!*map)
 		return (free(data->line_len), false);
+	ft_bzero(*map, data->len_y * sizeof(t_map *));
 	return (true);
 }

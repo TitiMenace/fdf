@@ -19,8 +19,7 @@ unsigned int	get_interpolated_color(t_data *data, unsigned int start_color \
 {
 	t_inter	colors;
 
-	if (data->z_min == data->z_max)
-		return (0x00FF0000);
+	(void)data;
 	colors.start_r = (start_color >> 16) & 0xFF;
 	colors.start_g = (start_color >> 8) & 0xFF;
 	colors.start_b = start_color & 0xFF;

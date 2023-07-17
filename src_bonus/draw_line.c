@@ -53,7 +53,9 @@ void	draw_line(t_data *data, t_point *seg)
 	t_line		utils;
 	t_bresen	help;
 
-	init_bresen_color(&help, seg, data);
+
+	if (!truncate_line(seg, data, &help))
+		return;
 	init_s_line(&utils);
 	utils.dx = ft_abs(seg->b_x - seg->a_x);
 	utils.dy = ft_abs(seg->b_y - seg->a_y);
@@ -61,6 +63,10 @@ void	draw_line(t_data *data, t_point *seg)
 	utils.sy = def_slope(seg->a_y, seg->b_y);
 	utils.err = def_error(utils.dx, utils.dy);
 	help.t = 0.0;
-	help.dt = 1.0 / (sqrt(utils.dx * utils.dx + utils.dy * utils.dy));
+	if (utils.dx * utils.dx + utils.dy * utils.dy == 0)
+		help.dt = 100000000000.; 
+	else
+		help.dt = 1.0 / (sqrt(utils.dx * utils.dx + utils.dy * utils.dy));
+	init_bresen_color(&help, seg, data);
 	bresenham(data, seg, &help, &utils);
 }
