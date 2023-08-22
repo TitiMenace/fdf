@@ -18,8 +18,8 @@ void	set_z_range(t_data *data, t_map ***map, int y, int x)
 {
 	if (y == 0 && x == 0)
 	{
-	data->z_max = (*map)[0][0].z;
-	data->z_min = (*map)[0][0].z;
+		data->z_max = (*map)[0][0].z;
+		data->z_min = (*map)[0][0].z;
 	}
 	else
 	{

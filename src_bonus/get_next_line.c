@@ -56,7 +56,7 @@ char	*clean_remain(char *remain)
 	}
 	out[j] = 0;
 	return (free(remain), out);
-}	
+}
 
 char	*get_next_line(int fd)
 {

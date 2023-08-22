@@ -88,7 +88,7 @@ bool	check_collide(t_point *seg, t_point *border, t_data *data);
 bool is_in_screen(int x, int y, t_data *data);
 bool	truncate_to_intersection(t_point *seg, t_data *data);
 bool	truncate_line_origin_to_screen(t_point *seg, t_data *data);
-bool	truncate_line(t_point *seg, t_data *data, t_bresen *helper);
+bool	truncate_line(t_point *seg, t_data *data);
 
 /* -------------------------------------------------------------------------- */
 /*                     FILE = src_bonus/initialization.c                      */
@@ -197,5 +197,10 @@ int	get_lines(char *str);
 void	free_map(t_map ***map, int i);
 bool	parsing_map(char *buffer, t_map ***map, t_data *data);
 
+/* -------------------------------------------------------------------------- */
+/*                         FILE = src_bonus/check_collide_utils.c             */
+/* -------------------------------------------------------------------------- */
+
+void	get_new_points(t_point *seg, t_point *vectors, t_data *data, float *t);
 
 #endif

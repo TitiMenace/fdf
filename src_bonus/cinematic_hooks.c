@@ -48,7 +48,6 @@ void	set_movements_hooks(t_data *data, int zazou)
 			data->fov += 1;
 		if (zazou == XK_t)
 			data->fov -= 1;
-		//dprintf(2, "fov %f\n", data->fov);
 	}
 }
 

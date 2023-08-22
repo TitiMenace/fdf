@@ -15,7 +15,7 @@
 #include "struct.h"
 
 bool	check_format(char *file_name)
-{	
+{
 	int	i;
 
 	i = ft_strlen(file_name);
@@ -27,7 +27,7 @@ bool	check_format(char *file_name)
 }
 
 char	*get_map(char *arg)
-{	
+{
 	int		i;
 	char	*new_line;
 	char	*buffer;

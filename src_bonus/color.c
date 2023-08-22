@@ -54,7 +54,7 @@ int	argb_to_int(int a, int r, int g, int b)
 }
 
 int	get_point_color(t_data *data, float z_origin, float z_rotated)
-{	
+{
 	float	z;	
 
 	(void)data;

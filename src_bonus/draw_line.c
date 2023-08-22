@@ -53,9 +53,8 @@ void	draw_line(t_data *data, t_point *seg)
 	t_line		utils;
 	t_bresen	help;
 
-
-	if (!truncate_line(seg, data, &help))
-		return;
+	if (!truncate_line(seg, data))
+		return ;
 	init_s_line(&utils);
 	utils.dx = ft_abs(seg->b_x - seg->a_x);
 	utils.dy = ft_abs(seg->b_y - seg->a_y);

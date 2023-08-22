@@ -24,10 +24,12 @@ void	draw_line_pixel_put(t_data *data, t_point *seg, t_bresen *help)
 void	bresenham(t_data *data, t_point *seg, t_bresen *help, t_line *utils)
 {
 	while ((seg->a_x != seg->b_x || seg->a_y != seg->b_y)
-			&& (seg->a_x >= 0 && seg->a_x <= 1920) && (seg->a_y >= 0 && seg->a_y <= 1080))
+		&& (seg->a_x >= 0 && seg->a_x <= 1920)
+		&& (seg->a_y >= 0 && seg->a_y <= 1080))
 	{
 		help->t += help->dt;
-		if ((data->isometric == true || (seg->a_z + data->fov > 0 && seg->b_z + data->fov > 0)))
+		if ((data->isometric == true
+				|| (seg->a_z + data->fov > 0 && seg->b_z + data->fov > 0)))
 			draw_line_pixel_put(data, seg, help);
 		utils->err2 = utils->err;
 		if (utils->err2 > -utils->dx)
@@ -55,13 +57,19 @@ void	init_bresen_color(t_bresen *help, t_point *seg, t_data *data)
 	}
 	else
 	{
-		a_scale = help->scale = (seg->z1_origin - data->z_min) / (data->z_max - data->z_min);
-		b_scale = help->scale = (seg->z2_origin - data->z_min) / (data->z_max - data->z_min);
+		help->scale = (seg->z1_origin - data->z_min)
+			/ (data->z_max - data->z_min);
+		a_scale = help->scale;
+		help->scale = (seg->z2_origin - data->z_min)
+			/ (data->z_max - data->z_min);
+		b_scale = help->scale;
 	}
 	help->color1 = seg->col_a;
 	help->color2 = seg->col_b;
 	if (seg->col_a == 0 || data->end_color != 0)
-		help->color1 = get_interpolated_color(data, data->start_color, data->end_color, a_scale);
+		help->color1 = get_interpolated_color(data, data->start_color,
+				data->end_color, a_scale);
 	if (seg->col_b == 0 || data->end_color != 0)
-		help->color2 = get_interpolated_color(data, data->start_color, data->end_color, b_scale);
+		help->color2 = get_interpolated_color(data, data->start_color,
+				data->end_color, b_scale);
 }

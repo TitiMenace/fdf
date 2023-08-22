@@ -40,7 +40,7 @@ int	get_line_len(char *str, int i)
 			continue ;
 		}
 		if (str[i] != ' ' && str[i] != '\n'
-				&& (str[i] < 0  || str[i] > 9) && str[i] != '-')
+			&& (str[i] < 0 || str[i] > 9) && str[i] != '-')
 			return (-1);
 	}
 	return (count);

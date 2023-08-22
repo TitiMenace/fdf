@@ -30,8 +30,8 @@ bool	init_screen_border(t_data *data)
 	data->border.left_border.b_y = data->mlx.w_h;
 	data->border.bottom_border.a_x = 0;
 	data->border.bottom_border.a_y = data->mlx.w_h;
-	data->border.bottom_border.b_x = data->mlx.w_w;	
-	data->border.bottom_border.b_y = data->mlx.w_h;	
+	data->border.bottom_border.b_x = data->mlx.w_w;
+	data->border.bottom_border.b_y = data->mlx.w_h;
 	return (true);
 }
 
@@ -40,7 +40,7 @@ bool	init_mlx(t_data *data)
 	data->mlx.mlx = mlx_init();
 	if (!data->mlx.mlx)
 		return (false);
-	if (WIN_WIDTH <= 0  || WIN_HEIGHT <= 0)
+	if (WIN_WIDTH <= 0 || WIN_HEIGHT <= 0)
 		return (false);
 	else
 	{
@@ -91,7 +91,7 @@ bool	initializations(t_data *data)
 }
 
 int	main(int ac, char **av)
-{	
+{
 	t_data	data;
 
 	ft_bzero(&data, sizeof(t_data));
@@ -103,7 +103,7 @@ int	main(int ac, char **av)
 		return (write(2, "Error\n", 6));
 	if (!initializations(&data))
 	{
-		destroy(&data);		
+		destroy(&data);
 		return (1);
 	}
 	init_angle(&data);

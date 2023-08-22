@@ -54,12 +54,8 @@ void	img_init(t_data	*data)
 int	color_from_alpha(unsigned int old_color, \
 		unsigned int new_color, float alpha)
 {
-//	char	*old_col;
-//	char	*new_col;
 	t_rgb	alpha_tmp;
 
-//	old_col = (char *)&old_color;
-//	new_col = (char *)&new_color;
 	alpha_tmp.r = ((old_color << 8) >> 24) * alpha
 		+ ((new_color << 8) >> 24) * (1. - alpha);
 	alpha_tmp.g = ((old_color << 16) >> 24) * alpha

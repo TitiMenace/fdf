@@ -20,7 +20,7 @@ SRC_FILES_BONUS	=	main.c fdf_utils.c get_next_line.c get_next_line_utils.c \
 					initialization.c cinematic_hooks.c parsing_utils.c\
 					mlx_utils.c colors_hooks.c draw_helper.c \
 					draw_map_utils.c rotates_utils.c draw_line_utils.c \
-					truncate_line.c
+					truncate_line.c check_collide_utils.c
 
 SRC_DIR_BONUS	= src_bonus
 

@@ -15,7 +15,7 @@
 #include "struct.h"
 
 void	set_init_rot_helper(t_data *data, float x, float y, float z)
-{	
+{
 	data->rot_hlp.x = x;
 	data->rot_hlp.y = y;
 	data->rot_hlp.z = z;
