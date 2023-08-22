@@ -83,7 +83,7 @@ $(BONUS_NAME)	:	 	$(OBJ_BONUS) $(LIBS)
 $(OBJ_BONUS_DIR)/%.o 		:	$(SRC_DIR_BONUS)/%.c
 						@printf "\033[0;33m Generating fdf object... %-38.38s \r" $@
 						@mkdir -p $(OBJ_BONUS_DIR)
-						@$(CC) -Wall -Wextra -Werror -o3 -g3 -c -I $(HEADER) $< -o $@
+						@$(CC) -Wall -Wextra -Werror -g3 -c -I $(HEADER) $< -o $@
 
 $(LIBS)	:				
 			make -C $(LIBS_FOLDER)/$(MLX_DIR)

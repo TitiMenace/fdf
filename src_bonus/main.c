@@ -40,8 +40,13 @@ bool	init_mlx(t_data *data)
 	data->mlx.mlx = mlx_init();
 	if (!data->mlx.mlx)
 		return (false);
-	data->mlx.w_w = WIN_WIDTH;
-	data->mlx.w_h = WIN_HEIGHT;
+	if (WIN_WIDTH <= 0  || WIN_HEIGHT <= 0)
+		return (false);
+	else
+	{
+		data->mlx.w_w = WIN_WIDTH;
+		data->mlx.w_h = WIN_HEIGHT;
+	}
 	data->mlx.win = mlx_new_window(data->mlx.mlx, data->mlx.w_w, \
 			data->mlx.w_h, "fdf");
 	if (!data->mlx.win)
