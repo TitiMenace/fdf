@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_utils.c                                        :+:      :+:    :+:   */
+/*   check_collide_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/28 12:05:46 by tschecro          #+#    #+#             */
-/*   Updated: 2023/04/07 05:10:01 by tschecro         ###   ########.fr       */
+/*   Created: 2023/08/22 17:12:55 by tschecro          #+#    #+#             */
+/*   Updated: 2023/08/22 17:12:57 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,16 @@
 #include "struct.h"
 #include "includes.h"
 
-int	ft_strlen(char *str)
+void	get_new_points(t_point *seg, t_point *vectors, t_data *data, float *t)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
-}
-
-void	ft_bzero(void *ptr, size_t count)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < count)
-	{
-		((char *)ptr)[i] = 0;
-		i++;
-	}
+	seg->a_x += (*t * vectors->a_x);
+	seg->a_y += (*t * vectors->a_y);
+	if (seg->a_x < 0)
+		seg->a_x = 0;
+	if (seg->a_y < 0)
+		seg->a_y = 0;
+	if (seg->a_x >= data->mlx.w_w)
+		seg->a_x = data->mlx.w_w - 1;
+	if (seg->a_y >= data->mlx.w_h)
+		seg->a_y = data->mlx.w_h - 1;
 }

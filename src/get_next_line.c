@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 02:05:36 by tschecro          #+#    #+#             */
-/*   Updated: 2023/03/28 15:18:20 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/11 23:23:47 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*clean_remain(char *remain)
 	}
 	out[j] = 0;
 	return (free(remain), out);
-}	
+}
 
 char	*get_next_line(int fd)
 {

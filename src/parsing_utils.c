@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:55:52 by tschecro          #+#    #+#             */
-/*   Updated: 2023/07/10 20:49:56 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:00:58 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ bool	parsing_malloc(int *len, int *y, t_map ***map, t_data *data)
 	if (!(*map)[*y])
 		return (free_map(map, *y), false);
 	data->line_len[*y] = *len;
+	return (true);
 }
 
 void	get_line_len_utils(char *str, int *i, int *count)

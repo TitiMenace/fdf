@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prototypes.h                                       :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmechety <rmechety@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 12:52:24 by rmechety          #+#    #+#             */
-/*   Updated: 2021/10/19 15:08:54 by rmechety         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:39:14 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,20 @@
 # include "includes.h"
 # include "../lib/minilibx-linux/mlx.h"
 
+typedef unsigned int	t_uint;
+
 /* -------------------------------------------------------------------------- */
 /*                          FILE = src_bonus/hooks.c                          */
 /* -------------------------------------------------------------------------- */
-int	destroy(t_data *data);
-int	cross_button(t_data *data);
+int		destroy(t_data *data);
+int		cross_button(t_data *data);
 void	init_hooks(t_data *data);
 
 /* -------------------------------------------------------------------------- */
 /*                   FILE = src_bonus/get_next_line_utils.c                   */
 /* -------------------------------------------------------------------------- */
 char	*ft_strndup(char *str);
-int	check_buff(char *buffer, char c);
+int		check_buff(char *buffer, char c);
 char	*ft_strjoin(char *remain, char *buffer);
 
 /* -------------------------------------------------------------------------- */
@@ -36,7 +38,7 @@ char	*ft_strjoin(char *remain, char *buffer);
 /* -------------------------------------------------------------------------- */
 void	ft_memset(void *ptr, int value, size_t count);
 void	img_init(t_data	*data);
-int	color_from_alpha(unsigned int old_color, unsigned int new_color, float alpha);
+int		color_from_alpha(t_uint old_color, t_uint new_color, float alpha);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 /* -------------------------------------------------------------------------- */
@@ -57,11 +59,12 @@ void	init_rotations(t_rot *rotation, t_data *data);
 /* -------------------------------------------------------------------------- */
 /*                          FILE = src_bonus/color.c                          */
 /* -------------------------------------------------------------------------- */
-unsigned int	get_interpolated_color(t_data *data, unsigned int start_color, unsigned int end_color, double t);
+t_uint	get_interpolated_color(t_data *data, t_uint start_color,
+			t_uint end_color, double t);
 float	max(float a, float b);
 float	min(float a, float b);
-int	argb_to_int(int a, int r, int g, int b);
-int	get_point_color(t_data *data, float z_origin, float z_rotated);
+int		argb_to_int(int a, int r, int g, int b);
+int		get_point_color(t_data *data, float z_origin, float z_rotated);
 
 /* -------------------------------------------------------------------------- */
 /*                      FILE = src_bonus/colors_hooks.c                       */
@@ -88,7 +91,7 @@ void	draw_line(t_data *data, t_point *seg);
 /*                      FILE = src_bonus/truncate_line.c                      */
 /* -------------------------------------------------------------------------- */
 bool	check_collide(t_point *seg, t_point *border, t_data *data);
-bool is_in_screen(int x, int y, t_data *data);
+bool	is_in_screen(int x, int y, t_data *data);
 bool	truncate_to_intersection(t_point *seg, t_data *data);
 bool	truncate_line_origin_to_screen(t_point *seg, t_data *data);
 bool	truncate_line(t_point *seg, t_data *data);
@@ -122,15 +125,15 @@ bool	draw_map(t_map ***map, t_data *data);
 /* -------------------------------------------------------------------------- */
 /*                        FILE = src_bonus/get_color.c                        */
 /* -------------------------------------------------------------------------- */
-int	strhexlen(char *buffer);
+int		strhexlen(char *buffer);
 bool	ishexdigit(char c);
-int	ft_atohex(char *buffer);
+int		ft_atohex(char *buffer);
 
 /* -------------------------------------------------------------------------- */
 /*                        FILE = src_bonus/fdf_utils.c                        */
 /* -------------------------------------------------------------------------- */
-int	ft_strlen(char *str);
-int	ft_strcmp(char *s1, char *s2);
+int		ft_strlen(char *str);
+int		ft_strcmp(char *s1, char *s2);
 void	ft_bzero(void *ptr, size_t count);
 
 /* -------------------------------------------------------------------------- */
@@ -138,7 +141,7 @@ void	ft_bzero(void *ptr, size_t count);
 /* -------------------------------------------------------------------------- */
 bool	check_format(char *file_name);
 char	*get_map(char *arg);
-int	ft_atoi(char *buffer, int *index);
+int		ft_atoi(char *buffer, int *index);
 bool	init_map(char *file_name, t_map	***map, t_data *data);
 
 /* -------------------------------------------------------------------------- */
@@ -189,14 +192,14 @@ bool	init_screen_border(t_data *data);
 bool	init_mlx(t_data *data);
 void	rendering(t_data *data);
 bool	initializations(t_data *data);
-int	main(int ac, char **av);
+int		main(int ac, char **av);
 
 /* -------------------------------------------------------------------------- */
 /*                         FILE = src_bonus/parsing.c                         */
 /* -------------------------------------------------------------------------- */
-int	get_line_len(char *str, int i);
+int		get_line_len(char *str, int i);
 bool	isprintable(char c);
-int	get_lines(char *str);
+int		get_lines(char *str);
 void	free_map(t_map ***map, int i);
 bool	parsing_map(char *buffer, t_map ***map, t_data *data);
 

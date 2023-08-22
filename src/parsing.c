@@ -6,7 +6,7 @@
 /*   By: tschecro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 05:40:23 by tschecro          #+#    #+#             */
-/*   Updated: 2023/07/10 21:09:28 by tschecro         ###   ########.fr       */
+/*   Updated: 2023/07/12 01:08:51 by tschecro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,23 @@ int	get_line_len(char *str, int i)
 {
 	int	count;
 
-	i = 0;
 	count = 0;
-
 	while (str[i] == '\n' || str[i] == ' ')
 		i++;
 	while (str[i] != '\n')
-	{ 
+	{
 		while (str[i] == ' ')
 			i++;
-		if (str[i] == '-')
-			i++;
-		if (str[i] >= '0' && str[i] <= '9')
-		{
-			count++;
-			while (str[i] >= '0' && str[i] <= '9')
-				i++;
-		}
+		get_line_len_utils(str, &i, &count);
 		if (str[i] == ',')
 		{
 			while (str[i] != ' ' && str[i] != '\n')
 				i++;
-			continue;
+			continue ;
 		}
+		if (str[i] != ' ' && str[i] != '\n'
+			&& (str[i] < 0 || str[i] > 9) && str[i] != '-')
+			return (-1);
 	}
 	return (count);
 }
@@ -82,3 +76,31 @@ void	free_map(t_map ***map, int i)
 	free(*map);
 }
 
+bool	parsing_map(char *buffer, t_map ***map, t_data *data)
+{
+	int	y;
+	int	x;
+	int	index;
+	int	len;
+
+	if (!map_allocation(data, buffer, map))
+		return (false);
+	y = 0;
+	index = 0;
+	while (y < data->len_y)
+	{
+		len = get_line_len(buffer, index);
+		if (!(parsing_malloc(&len, &y, map, data)))
+			return (false);
+		x = 0;
+		while (x < data->line_len[y])
+		{
+			(*map)[y][x].z = ft_atoi(buffer, &index);
+			set_z_range(data, map, y, x);
+			get_map_color_hex(buffer, &index, &(*map)[y][x].color.hex);
+			x++;
+		}
+		y++;
+	}
+	return (true);
+}
