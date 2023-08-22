@@ -14,6 +14,28 @@
 #include "struct.h"
 #include "includes.h"
 
+bool	parsing_malloc(int *len, int *y, t_map ***map, t_data *data)
+{
+	if (*len < 0)
+		return (free_map(map, *y), false);
+	(*map)[*y] = malloc(sizeof(t_map) * *len);
+	if (!(*map)[*y])
+		return (free_map(map, *y), false);
+	data->line_len[*y] = *len;
+}
+
+void	get_line_len_utils(char *str, int *i, int *count)
+{
+	if (str[*i] == '-')
+		(*i)++;
+	if (str[*i] >= '0' && str[*i] <= '9')
+	{
+		(*count)++;
+		while (str[*i] >= '0' && str[*i] <= '9')
+			(*i)++;
+	}
+}
+
 void	set_z_range(t_data *data, t_map ***map, int y, int x)
 {
 	if (y == 0 && x == 0)

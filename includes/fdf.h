@@ -72,7 +72,10 @@ void	set_colors_hooks(t_data *data, int zazou);
 /* -------------------------------------------------------------------------- */
 /*                      FILE = src_bonus/parsing_utils.c                      */
 /* -------------------------------------------------------------------------- */
+
+bool	parsing_malloc(int *len, int *y, t_map ***map, t_data *data);
 void	set_z_range(t_data *data, t_map ***map, int y, int x);
+void	get_line_len_utils(char *str, int *i, int *count);
 void	get_map_color_hex(char *buffer, int *index, int *hex_color);
 bool	map_allocation(t_data *data, char *buffer, t_map ***map);
 
