@@ -135,6 +135,7 @@ int		ft_atohex(char *buffer);
 int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
 void	ft_bzero(void *ptr, size_t count);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 /* -------------------------------------------------------------------------- */
 /*                        FILE = src_bonus/check_map.c                        */

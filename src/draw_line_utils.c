@@ -24,8 +24,8 @@ void	draw_line_pixel_put(t_data *data, t_point *seg, t_bresen *help)
 void	bresenham(t_data *data, t_point *seg, t_bresen *help, t_line *utils)
 {
 	while ((seg->a_x != seg->b_x || seg->a_y != seg->b_y)
-		&& (seg->a_x >= 0 && seg->a_x <= 1920)
-		&& (seg->a_y >= 0 && seg->a_y <= 1080))
+		&& (seg->a_x >= 0 && seg->a_x <= data->mlx.w_w)
+		&& (seg->a_y >= 0 && seg->a_y <= data->mlx.w_h))
 	{
 		help->t += help->dt;
 		if ((data->isometric == true

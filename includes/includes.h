@@ -19,7 +19,7 @@
 
 # include <math.h>
 
-# define WIN_WIDTH 1920
+# define WIN_WIDTH 1923
 # define WIN_HEIGHT 1080
 # define OFFSET 10
 # define RA_X 45
@@ -40,5 +40,6 @@
 # include <stdlib.h>
 # include <X11/X.h>
 # include <errno.h>
+# include <stdint.h>
 
 #endif

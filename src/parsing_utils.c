@@ -18,7 +18,7 @@ bool	parsing_malloc(int *len, int *y, t_map ***map, t_data *data)
 {
 	if (*len < 0)
 		return (free_map(map, *y), false);
-	(*map)[*y] = malloc(sizeof(t_map) * *len);
+	(*map)[*y] = ft_calloc(sizeof(t_map), (*len));
 	if (!(*map)[*y])
 		return (free_map(map, *y), false);
 	data->line_len[*y] = *len;
@@ -32,7 +32,7 @@ void	get_line_len_utils(char *str, int *i, int *count)
 	if (str[*i] >= '0' && str[*i] <= '9')
 	{
 		(*count)++;
-		while (str[*i] >= '0' && str[*i] <= '9')
+		while (str[*i] >= '0' && str[*i] <= '9' && str[*i])
 			(*i)++;
 	}
 }
@@ -73,7 +73,7 @@ bool	map_allocation(t_data *data, char *buffer, t_map ***map)
 	data->line_len = malloc(sizeof(int) * data->len_y);
 	if (!data->line_len)
 		return (false);
-	*map = malloc(sizeof(t_map *) * data->len_y);
+	*map = ft_calloc(sizeof(t_map *), data->len_y);
 	if (!*map)
 		return (free(data->line_len), false);
 	ft_bzero(*map, data->len_y * sizeof(t_map *));

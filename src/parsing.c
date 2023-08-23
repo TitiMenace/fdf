@@ -21,7 +21,7 @@ int	get_line_len(char *str, int i)
 	count = 0;
 	while (str[i] == '\n' || str[i] == ' ')
 		i++;
-	while (str[i] != '\n')
+	while (str[i] != '\n' && str[i])
 	{
 		while (str[i] == ' ')
 			i++;
@@ -89,12 +89,14 @@ bool	parsing_map(char *buffer, t_map ***map, t_data *data)
 	index = 0;
 	while (y < data->len_y)
 	{
+		
 		len = get_line_len(buffer, index);
 		if (!(parsing_malloc(&len, &y, map, data)))
 			return (false);
 		x = 0;
 		while (x < data->line_len[y])
 		{
+			
 			(*map)[y][x].z = ft_atoi(buffer, &index);
 			set_z_range(data, map, y, x);
 			get_map_color_hex(buffer, &index, &(*map)[y][x].color.hex);

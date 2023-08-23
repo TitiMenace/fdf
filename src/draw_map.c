@@ -52,7 +52,7 @@ bool	draw_adjacent(int i, t_map ***map, t_data *data)
 		data->draw_helper.origin.z_origin = (*map)[i][j].z;
 		if (j + 1 != data->line_len[i])
 			data->draw_helper.right.z_origin = (*map)[i][j + 1].z;
-		if (i + 1 != data->len_y)
+		if (i + 1 != data->len_y && j < data->line_len[i + 1])
 			data->draw_helper.down.z_origin = (*map)[i + 1][j].z;
 		if (j == 0)
 			set_origin_point(data, map, i, j);

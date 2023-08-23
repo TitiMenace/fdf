@@ -86,6 +86,9 @@ bool	drawing(t_data *data, t_map ***map, int i, int j)
 			return (false);
 	}
 	else
-		regular_drawing(data, map, i, j);
+	{
+		if (j < data->line_len[i + 1])
+			regular_drawing(data, map, i, j);
+	}
 	return (true);
 }
