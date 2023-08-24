@@ -49,7 +49,7 @@ void	ft_bzero(void *ptr, size_t count)
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*out;
-	
+
 	if (size && nmemb >= SIZE_MAX / size)
 		return (NULL);
 	out = malloc (size * nmemb);
